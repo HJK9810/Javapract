@@ -1,5 +1,7 @@
 package base;
 
+import java.util.*;
+
 public class Variable {
     public static double Lightdistance() {
         double distance = 40e12;
@@ -20,9 +22,20 @@ public class Variable {
         return 0;
     }
 
+    public static double CircleArea() {
+        Scanner input = new Scanner(System.in);
+        final double PI = 3.14; // 파이값은 3.14로 고정
+
+        System.out.print("반지름을 입력하시오: ");
+        double radius = input.nextDouble();
+
+        return radius * radius * PI;
+    }
+
     public static void main(String[] args) {
 //        System.out.println("걸리는 시간은"+ Lightdistance() +"광년입니다.");
-        QudraticFormular(1, -3.0, 2.0);
+//        QudraticFormular(1, -3.0, 2.0);
+        System.out.println(CircleArea());
     }
 
 }
