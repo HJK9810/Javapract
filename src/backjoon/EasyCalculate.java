@@ -2,7 +2,7 @@ package backjoon;
 
 import java.util.Scanner;
 
-public class Main {
+public class EasyCalculate {
     public static int Plus1() {
         Scanner input = new Scanner(System.in);
         int A = input.nextInt();
@@ -21,7 +21,7 @@ public class Main {
         return 0;
     }
 
-    public static int Remain () {
+    public static int Remain() {
         Scanner input = new Scanner(System.in);
         int A = input.nextInt();
         int B = input.nextInt();
@@ -39,18 +39,31 @@ public class Main {
         int A = input.nextInt();
         int B = input.nextInt();
 
-        int first = B/100;
+        int first = B / 100;
         B %= 100;
-        int second = B/10;
-        B%=10;
-        System.out.println(A*B);
-        System.out.println(A*second);
-        System.out.println(A*first);
+        int second = B / 10;
+        B %= 10;
+        System.out.println(A * B);
+        System.out.println(A * second);
+        System.out.println(A * first);
 
-        System.out.println(A*first*100+A*second*10+A*B);
+        System.out.println(A * first * 100 + A * second * 10 + A * B);
         return 0;
     }
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        int[] sum = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int A = input.nextInt();
+            int B = input.nextInt();
+            sum[i] = A + B;
+        }
+
+        for (int j : sum) {
+            System.out.println(j);
+        }
     }
 }
