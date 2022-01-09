@@ -32,8 +32,33 @@ public class ControlState {
         return 0;
     }
 
+    public static void ContMonthDays() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("일수를 알고 싶은 월을 입력하시오:");
+        int month = input.nextInt();
+        int day = 0;
+
+        switch (month) {
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                day = 30;
+                break;
+            case 2:
+                day = 28;
+                break;
+            default:
+                day = 31;
+                break;
+        }
+
+        System.out.println("월의 날수는 "+ day);
+    }
+
     public static void main(String[] args) {
 //        CheckGrade();
-        PrintHello();
+//        PrintHello();
+        ContMonthDays();
     }
 }
