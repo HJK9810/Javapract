@@ -78,7 +78,7 @@ public class ControlState {
         int sum = 0;
         Random generator = new Random();
 
-        for(int i=0;i<count;i++) {
+        for (int i = 0; i < count; i++) {
             int number = generator.nextInt(100);
             sum += number;
         }
@@ -86,11 +86,29 @@ public class ControlState {
         System.out.printf("난수 %d개의 합은 %d", count, sum);
     }
 
+    public static void findNum() {
+        Scanner input = new Scanner(System.in);
+        int number = (int) (Math.random() * (100)) + 1;
+        int count = 0;
+        int guess;
+
+        do {
+            System.out.print("정답을 추측하여 보십시오: ");
+            guess = input.nextInt();
+            count++;
+            if (guess < number) System.out.println("제시한 정수가 낮습니다.");
+            else if (guess > number) System.out.println("제시한 정수가 높습니다.");
+        } while (guess != number);
+
+        System.out.println("축하합니다. 시도횟수 = " + count);
+    }
+
     public static void main(String[] args) {
 //        CheckGrade();
 //        PrintHello();
 //        ContMonthDays();
 //        GCD();
-        RandomSum();
+//        RandomSum();
+        findNum();
     }
 }
