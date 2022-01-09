@@ -71,10 +71,26 @@ public class ControlState {
         System.out.println("최대 공약수는 " + num1);
     }
 
+    public static void RandomSum() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("난수의 개수: ");
+        int count = input.nextInt();
+        int sum = 0;
+        Random generator = new Random();
+
+        for(int i=0;i<count;i++) {
+            int number = generator.nextInt(100);
+            sum += number;
+        }
+
+        System.out.printf("난수 %d개의 합은 %d", count, sum);
+    }
+
     public static void main(String[] args) {
 //        CheckGrade();
 //        PrintHello();
 //        ContMonthDays();
-        GCD();
+//        GCD();
+        RandomSum();
     }
 }
