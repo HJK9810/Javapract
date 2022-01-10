@@ -2,6 +2,7 @@ package Labpract;
 
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class TicTaeToeArray {
 //    빙고판별
@@ -9,6 +10,7 @@ public class TicTaeToeArray {
         boolean check = false;
 
         for (int i = 0; i < 3; i++) {
+            if(ary[i][i].equals(" ")) continue;
             if (ary[i][0].equals(ary[i][1])) {
                 if (ary[i][1].equals(ary[i][2])) {
                     check = true;
@@ -51,6 +53,11 @@ public class TicTaeToeArray {
             int x = input.nextInt();
             int y = input.nextInt();
             gameboard[x][y] = "X";
+
+            if(CheckWinner(gameboard)) {
+                System.out.print("사용자의 승리입니다.");
+                break;
+            }
 //            컴퓨터의 턴
             for (int i = 0; i < 3; i++) {
                 boolean check = false;
@@ -63,6 +70,11 @@ public class TicTaeToeArray {
                     }
                 }
                 if (check) break;
+            }
+
+            if(CheckWinner(gameboard)) {
+                System.out.print("컴퓨터의 승리입니다.");
+                break;
             }
         }
     }
