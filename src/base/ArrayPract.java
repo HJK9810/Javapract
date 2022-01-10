@@ -57,6 +57,8 @@ public class ArrayPract {
             if (seatNum == -1) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
+            } else if (seatNum > SIZE || seatNum < -1) {
+                System.out.println("준비되지 않은 좌석입니다.");
             } else if (seats[seatNum - 1] == 0) {
                 seats[seatNum - 1] = 1;
                 System.out.println("예약되었습니다.");
