@@ -4,6 +4,27 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TicTaeToeArray {
+//    빙고판별
+    public static boolean CheckWinner(String[][] ary) {
+        boolean check = false;
+
+        for (int i = 0; i < 3; i++) {
+            if (ary[i][0].equals(ary[i][1])) {
+                if (ary[i][1].equals(ary[i][2])) {
+                    check = true;
+                    break;
+                }
+            } else if (ary[0][i].equals(ary[1][i])) {
+                if (ary[1][i].equals(ary[2][i])) {
+                    check = true;
+                    break;
+                }
+            }
+        }
+
+        return check;
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String[][] gameboard = new String[3][3];
@@ -34,7 +55,7 @@ public class TicTaeToeArray {
             for (int i = 0; i < 3; i++) {
                 boolean check = false;
                 for (int j = 0; j < 3; j++) {
-                    if (!Objects.equals(gameboard[i][j], " ")) continue;
+                    if (!gameboard[i][j].equals(" ")) continue;
                     else {
                         gameboard[i][j] = "O";
                         check = true;
