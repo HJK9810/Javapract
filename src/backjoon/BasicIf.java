@@ -38,9 +38,26 @@ public class BasicIf {
         }
     }
 
+    public static void AlarmClock() {
+        Scanner input = new Scanner(System.in);
+        int H = input.nextInt();
+        int M = input.nextInt();
+        int hour = H, minute = M - 45;
+
+        if (minute < 0) {
+            hour -= 1;
+            minute += 60;
+
+            if (hour < 0) hour = 23;
+        }
+
+        System.out.println(hour + " " + minute);
+    }
+
     public static void main(String[] args) {
 //        CheckTwoNum();
 //        TestGrade();
-        CheckQuardrant();
+//        CheckQuardrant();
+        AlarmClock();
     }
 }
