@@ -1,5 +1,7 @@
 package backjoon;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class BasicFor {
@@ -43,8 +45,25 @@ public class BasicFor {
         }
     }
 
+    public static void Plus8() {
+        Scanner input = new Scanner(System.in);
+        final int SIZE = input.nextInt();
+        int[][] nums = new int[SIZE][3];
+
+        for (int i = 0; i < SIZE; i++) {
+            nums[i][1] = input.nextInt();
+            nums[i][2] = input.nextInt();
+            nums[i][3] = nums[i][1] + nums[i][2];
+        }
+
+        for (int i = 0; i < SIZE; i++) {
+            System.out.printf("Case #%d: %d + %d = %d\n", i + 1, nums[i][1], nums[i][2], nums[i][3] );
+        }
+    }
+
     public static void main(String[] args) {
 //        NineXNine();
-        Plus7();
+//        Plus7();
+        Plus8();
     }
 }
