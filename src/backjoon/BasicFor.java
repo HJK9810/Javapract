@@ -1,7 +1,6 @@
 package backjoon;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Scanner;
 
 public class BasicFor {
@@ -36,7 +35,7 @@ public class BasicFor {
         int X = input.nextInt();
         int[] ary = new int[SIZE];
 
-        for(int i=0;i<SIZE;i++) {
+        for (int i = 0; i < SIZE; i++) {
             ary[i] = input.nextInt();
         }
 
@@ -45,23 +44,24 @@ public class BasicFor {
         }
     }
 
-    public static void Plus8() {
-        Scanner input = new Scanner(System.in);
-        final int SIZE = input.nextInt();
-        int[][] nums = new int[SIZE][3];
+    public static void Plus8() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        String[] printStr = new String[SIZE];
 
         for (int i = 0; i < SIZE; i++) {
-            nums[i][1] = input.nextInt();
-            nums[i][2] = input.nextInt();
-            nums[i][3] = nums[i][1] + nums[i][2];
+            String s = input.readLine();
+            String[] nums = s.split(" ");
+            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
+            printStr[i] = "Case #" + (i + 1) + ": " + nums[0] + " + " + nums[1] + " = " + sum;
         }
 
         for (int i = 0; i < SIZE; i++) {
-            System.out.printf("Case #%d: %d + %d = %d\n", i + 1, nums[i][1], nums[i][2], nums[i][3] );
+            System.out.println(printStr[i]);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        NineXNine();
 //        Plus7();
         Plus8();
