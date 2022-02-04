@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class BasicFor {
     public static void NineXNine() { //구구단 출력
@@ -61,9 +62,32 @@ public class BasicFor {
         }
     }
 
+    public static void QuickPlus() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        String[] printSum = new String[SIZE];
+
+        for (int i = 0; i < SIZE; i++) {
+            String s = input.readLine();
+            StringTokenizer st = new StringTokenizer(s);
+            int num1 = Integer.parseInt(st.nextToken());
+            int num2 = Integer.parseInt(st.nextToken());
+
+            printSum[i] = String.valueOf(num1 + num2);
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (String sum : printSum) {
+            output.write(sum + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        NineXNine();
 //        Plus7();
-        Plus8();
+//        Plus8();
+        QuickPlus();
     }
 }
