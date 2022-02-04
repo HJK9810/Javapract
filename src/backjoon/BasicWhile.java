@@ -25,7 +25,28 @@ public class BasicWhile {
         output.close();
     }
 
+    public static void CiclePlus() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final String NUM = input.readLine();
+        String number = "";
+        int count = 0;
+        input.close();
+
+        while (!number.equals(NUM)) {
+            String[] nums = NUM.split("");
+            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
+            number = nums[1] + sum;
+            count++;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(count);
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
-        Plus4();
+//        Plus4();
+        CiclePlus();
     }
 }
