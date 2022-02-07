@@ -28,16 +28,25 @@ public class BasicWhile {
     public static void CiclePlus() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final String NUM = input.readLine();
-        String number = "";
+        String number = NUM;
         int count = 0;
+        String[] nums;
         input.close();
 
-        while (!number.equals(NUM)) {
-            String[] nums = NUM.split("");
-            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
-            number = nums[1] + sum;
+//        do while 시도
+        do {
+            nums = number.split("");
+            int sum = Integer.parseInt(nums[0])+Integer.parseInt(nums[1]);
+            number = nums[1]+""+sum;
             count++;
-        }
+        } while (!number.equals(NUM));
+
+//        while (!number.equals(NUM)) {
+//            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
+//            number = nums[1] + sum;
+//            nums = number.split("");
+//            count++;
+//        }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
         output.write(count);
