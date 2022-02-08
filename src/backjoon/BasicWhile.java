@@ -42,13 +42,6 @@ public class BasicWhile {
             count++;
         } while (!number.equals(NUM));
 
-//        while (!number.equals(NUM)) {
-//            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
-//            number = nums[1] + sum;
-//            nums = number.split("");
-//            count++;
-//        }
-
         System.out.println(count);
     }
 
