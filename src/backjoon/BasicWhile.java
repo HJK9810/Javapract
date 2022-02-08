@@ -37,7 +37,8 @@ public class BasicWhile {
         do {
             nums = number.split("");
             int sum = Integer.parseInt(nums[0])+Integer.parseInt(nums[1]);
-            number = nums[1]+""+sum;
+            if(sum<10) number = nums[1]+""+sum;
+            else number = nums[1] + String.valueOf(sum).split("")[1];
             count++;
         } while (!number.equals(NUM));
 
@@ -48,10 +49,7 @@ public class BasicWhile {
 //            count++;
 //        }
 
-        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write(count);
-        output.flush();
-        output.close();
+        System.out.println(count);
     }
 
     public static void main(String[] args) throws IOException {
