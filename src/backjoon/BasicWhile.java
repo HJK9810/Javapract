@@ -27,7 +27,9 @@ public class BasicWhile {
 
     public static void CiclePlus() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        final String NUM = input.readLine();
+        String NUM = input.readLine();
+//        입력값이 한자릿수일 경우
+        if (Integer.parseInt(NUM) < 10) NUM = "0" + NUM;
         String number = NUM;
         int count = 0;
         String[] nums;
@@ -36,8 +38,9 @@ public class BasicWhile {
 //        do while 시도
         do {
             nums = number.split("");
-            int sum = Integer.parseInt(nums[0])+Integer.parseInt(nums[1]);
-            if(sum<10) number = nums[1]+""+sum;
+            int sum = Integer.parseInt(nums[0]) + Integer.parseInt(nums[1]);
+//            합이 두자리수 이상일 경우(한자릿수+한자릿수는 두자릿수 이상을 안넘어감)
+            if (sum < 10) number = nums[1] + "" + sum;
             else number = nums[1] + String.valueOf(sum).split("")[1];
             count++;
         } while (!number.equals(NUM));
