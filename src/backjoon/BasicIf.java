@@ -71,6 +71,27 @@ public class BasicIf {
         output.close();
     }
 
+    public static void ThreeClock() throws IOException{
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] dices = input.readLine().split(" ");
+        int ans = 0;
+        int present = 0;
+
+        if(dices[0].equals(dices[1])&&dices[1].equals(dices[2])) ans = 1;
+        else if(!dices[0].equals(dices[1])&&!dices[0].equals(dices[2])&&!dices[1].equals(dices[2])) ans = 3;
+        else ans = 2;
+
+        switch (ans) {
+            case 1:
+                present = 10000+1000*Integer.parseInt(dices[0]);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 //        CheckTwoNum();
 //        TestGrade();
