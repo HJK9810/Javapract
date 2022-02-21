@@ -1,5 +1,6 @@
 package backjoon;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class BasicIf {
@@ -54,10 +55,27 @@ public class BasicIf {
         System.out.println(hour + " " + minute);
     }
 
-    public static void main(String[] args) {
+    public static void OvenClock() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] nowTimes = input.readLine().split(" ");
+        int duringTime = Integer.parseInt(input.readLine());
+
+        int duringM = Integer.parseInt(nowTimes[1]) + duringTime;
+        int hour = duringM / 60 + Integer.parseInt(nowTimes[0]);
+        if(hour>=24) hour -= 24;
+        int minute = duringM % 60;
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(hour + " " + minute);
+        output.flush();
+        output.close();
+    }
+
+    public static void main(String[] args) throws IOException {
 //        CheckTwoNum();
 //        TestGrade();
 //        CheckQuardrant();
-        AlarmClock();
+//        AlarmClock();
+        OvenClock();
     }
 }
