@@ -1,7 +1,9 @@
 package backjoon;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class BasicIf {
     public static void CheckTwoNum() {
@@ -62,7 +64,7 @@ public class BasicIf {
 
         int duringM = Integer.parseInt(nowTimes[1]) + duringTime;
         int hour = duringM / 60 + Integer.parseInt(nowTimes[0]);
-        if(hour>=24) hour -= 24;
+        if (hour >= 24) hour -= 24;
         int minute = duringM % 60;
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -71,25 +73,44 @@ public class BasicIf {
         output.close();
     }
 
-    public static void ThreeClock() throws IOException{
+    public static void ThreeClock() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] dices = input.readLine().split(" ");
+        int[] dice = new int[dices.length];
+        for (int i = 0; i < dices.length; i++) {
+            dice[i] = Integer.parseInt(dices[i]);
+        }
+        Arrays.sort(dice);
         int ans = 0;
         int present = 0;
 
-        if(dices[0].equals(dices[1])&&dices[1].equals(dices[2])) ans = 1;
-        else if(!dices[0].equals(dices[1])&&!dices[0].equals(dices[2])&&!dices[1].equals(dices[2])) ans = 3;
-        else ans = 2;
+        if (dice[0] == dice[1] && dice[1] == dice[2]) ans = 1;
+        else if (dice[0] == dice[1] && dice[1] != dice[2]) {
+            present = dice[0];
+            ans = 2;
+        } else if (dice[0] != dice[1] && dice[1] == dice[2]) {
+            present = dice[1];
+            ans = 2;
+        } else ans = 3;
 
         switch (ans) {
             case 1:
-                present = 10000+1000*Integer.parseInt(dices[0]);
+                present = 10000 + 1000 * dice[0];
                 break;
             case 2:
+                present = present * 100 + 1000;
                 break;
             case 3:
+                present = dice[2] * 100;
+                break;
+            default:
                 break;
         }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(present);
+        output.flush();
+        output.close();
     }
 
     public static void main(String[] args) throws IOException {
@@ -97,6 +118,7 @@ public class BasicIf {
 //        TestGrade();
 //        CheckQuardrant();
 //        AlarmClock();
-        OvenClock();
+//        OvenClock();
+        ThreeClock();
     }
 }
