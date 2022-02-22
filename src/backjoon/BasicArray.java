@@ -72,10 +72,10 @@ public class BasicArray {
         String[] grades = input.readLine().split(" ");
         Arrays.sort(grades);
         float sum = 0;
-        int max = Integer.parseInt(grades[SIZE - 1]);
+        float max = Integer.parseInt(grades[SIZE - 1]);
 
         for (String grade : grades) {
-            int intgrade = Integer.parseInt(grade);
+            float intgrade = Integer.parseInt(grade);
             float now = (intgrade / max) * 100;
             sum = sum + now;
         }
