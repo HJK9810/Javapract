@@ -80,25 +80,22 @@ public class BasicIf {
         for (int i = 0; i < dices.length; i++) {
             dice[i] = Integer.parseInt(dices[i]);
         }
+
         Arrays.sort(dice);
-        int ans = 0;
+        int ans;
         int present = 0;
 
         if (dice[0] == dice[1] && dice[1] == dice[2]) ans = 1;
-        else if (dice[0] == dice[1] && dice[1] != dice[2]) {
-            present = dice[0];
-            ans = 2;
-        } else if (dice[0] != dice[1] && dice[1] == dice[2]) {
-            present = dice[1];
-            ans = 2;
-        } else ans = 3;
+        else if (dice[0] == dice[1]) ans = 2;
+        else if (dice[1] == dice[2]) ans = 2;
+        else ans = 3;
 
         switch (ans) {
             case 1:
                 present = 10000 + 1000 * dice[0];
                 break;
             case 2:
-                present = present * 100 + 1000;
+                present = dice[1] * 100 + 1000;
                 break;
             case 3:
                 present = dice[2] * 100;
@@ -108,7 +105,7 @@ public class BasicIf {
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write(present);
+        output.write(present+"");
         output.flush();
         output.close();
     }
