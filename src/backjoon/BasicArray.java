@@ -44,8 +44,31 @@ public class BasicArray {
         output.close();
     }
 
+    public static void CountNums() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        int A = Integer.parseInt(input.readLine());
+        int B = Integer.parseInt(input.readLine());
+        int C = Integer.parseInt(input.readLine());
+        int sum = A * B * C;
+
+        int[] numCount = new int[10];
+        String[] ary = (sum + "").split("");
+
+        for (String num : ary) {
+            numCount[Integer.parseInt(num)] += 1;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int num : numCount) {
+            output.write(num + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
-        Max();
+//        Max();
+        CountNums();
     }
 }
