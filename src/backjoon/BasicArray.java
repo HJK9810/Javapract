@@ -66,9 +66,30 @@ public class BasicArray {
         output.close();
     }
 
+    public static void Averg() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        String[] grades = input.readLine().split(" ");
+        Arrays.sort(grades);
+        float sum = 0;
+        int max = Integer.parseInt(grades[SIZE - 1]);
+
+        for (String grade : grades) {
+            int intgrade = Integer.parseInt(grade);
+            float now = (intgrade / max) * 100;
+            sum = sum + now;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write((sum / SIZE) + "\n");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
-        CountNums();
+//        CountNums();
+        Averg();
     }
 }
