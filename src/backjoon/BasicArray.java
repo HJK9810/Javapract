@@ -21,7 +21,31 @@ public class BasicArray {
         output.close();
     }
 
+    public static void Max() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        int[] nums = new int[9];
+        int max = -1;
+        int index = 0;
+
+        for (int i = 0; i < 9; i++) {
+            nums[i] = Integer.parseInt(input.readLine());
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (max < nums[i]) {
+                max = nums[i];
+                index = i;
+            }
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(max + "\n" + (index + 1));
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
-        MinAndMax();
+//        MinAndMax();
+        Max();
     }
 }
