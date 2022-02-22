@@ -3,7 +3,6 @@ package backjoon;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class BasicIf {
     public static void CheckTwoNum() {
