@@ -89,29 +89,30 @@ public class BasicArray {
     public static void OverAverg() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int SIZE = Integer.parseInt(input.readLine());
-        float[] printPercent = new float[SIZE];
+        double[] printPercent = new double[SIZE];
 
         for (int i = 0; i < SIZE; i++) {
             String[] ary = input.readLine().split(" ");
             int member = Integer.parseInt(ary[0]);
-            int sum = 0, averg;
+            int sum = 0;
+            double averg;
             int pass = 0;
 
             for (int j = 1; j < member + 1; j++) {
                 sum += Integer.parseInt(ary[j]);
             }
-            averg = sum / member;
+            averg = (double) (sum / member);
 
             for (int j = 1; j < member + 1; j++) {
                 if (Integer.parseInt(ary[j]) >= averg) pass += 1;
             }
 
-            float percent = (float) (pass / member) * 100;
+            double percent = (double) (pass / member) * 100;
             printPercent[i] = percent;
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        for (float percent : printPercent) {
+        for (double percent : printPercent) {
             output.write(percent + "%\n");
         }
         output.flush();
