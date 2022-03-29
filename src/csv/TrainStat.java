@@ -19,14 +19,14 @@ public class TrainStat {
             BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\saiiy\\Documents\\csv\\한국철도공사_정차역별 역무열차종별 승하차인원수_20201231.csv"));
             Charset.forName("euc-kr"); // change language type
             String line;
-            int count = 0, ycount = 0;
+            int count = 0, ycount = 0, mcount = 0;
             String year = "";
             String month = "";
             while ((line = br.readLine()) != null) {
                 String[] ary = line.split(",");
 
-                if(ary[4].equals("승차인원수")) continue;
-                if(!days.contains(ary[0])) {
+                if (ary[4].equals("승차인원수")) continue;
+                if (!days.contains(ary[0])) {
                     days.add(ary[0]);
                     in.add(Integer.parseInt(ary[4]));
                     out.add(Integer.parseInt(ary[5]));
@@ -37,27 +37,29 @@ public class TrainStat {
                 }
 
                 String[] today = ary[0].split("-");
-                if(!today[0].equals(year)) {
-                    years.add(ycount);
-                    ycount = 1;
-                    year = today[0];
-                } else ycount++;
 
-                if(today[2].equals("01")) {
+                if (today[2].equals("01")) {
                     dates.add(count);
+                    mcount += count;
                     count = 1;
-                }else count++;
+                } else count++;
+
+                if (today[1].equals("01")) {
+                    years.add(mcount);
+                    mcount = 0;
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        for(int i=0;i<years.size();i++) {
-//            System.out.println(years.get(i));
-//        }
-
-        for(int i=0;i<days.size();i++) {
-            System.out.println(days.get(i)+" - 승차 : " + in.get(i)+", 하차 : "+out.get(i));
+        for (int i = 0; i < years.size(); i++) {
+            System.out.println(years.get(i));
         }
+
+//        for (int i = 0; i < days.size(); i++) {
+//            System.out.println(days.get(i) + " - 승차 : " + in.get(i) + ", 하차 : " + out.get(i));
+//        }
     }
 }
