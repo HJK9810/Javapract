@@ -13,12 +13,28 @@ public class PrintUI {
 
         while (true) {
             if (num == 1) {
-                // 분기별 ui함수 추가
+                pui.printquter();
                 break;
             } else if (num == 2) {
                 pui.printcheck();
                 break;
             } else System.out.println("다시 입력해주세요.");
+        }
+    }
+
+    public void printquter() { // 분기별
+        System.out.println("보고자하는 분기를를 선택해주세요");
+        System.out.println("1. 지정일 단위\n2. 지정달\n");
+        int num = input.nextInt();
+
+        while(true) {
+            if(num==1) {
+                System.out.println("지정일 단위입니다.");
+                break;
+            } else if(num==2) {
+                System.out.println("지정 달 입니다.");
+                break;
+            } else System.out.println("잘못누르셨습니다. 다시 입력해주세요.");
         }
     }
 
