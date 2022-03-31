@@ -16,7 +16,7 @@ public class PrintUI {
                 pui.printquter();
                 break;
             } else if (num == 2) {
-                pui.printcheck();
+                pui.printculm();
                 break;
             } else System.out.println("다시 입력해주세요.");
         }
