@@ -7,6 +7,6 @@ public class TrainStat {
         String path = "C:\\Users\\saiiy\\Documents\\csv\\한국철도공사_정차역별 역무열차종별 승하차인원수_20201231.csv";
 
         pui.printcheck();
-        rc.Qurterly(path);
+        rc.culm(path);
     }
 }

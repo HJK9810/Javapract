@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class ReadCsv {
-    public void Qurterly(String path) { // for quterly
+    public void culm(String path) { // for accumulate
         ArrayList<String> days = new ArrayList<>(); // seperate by date
 
         ArrayList<Integer> in = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ReadCsv {
         }
     }
 
-    public void culm(String path) { // for accumulate
+    public void Qurterly(String path) { // for quterly
         ArrayList<String> days = new ArrayList<>(); // seperate by date
         ArrayList<String> Year = new ArrayList<>();
 
