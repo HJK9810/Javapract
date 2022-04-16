@@ -92,7 +92,7 @@ public class BasicArray {
         double[] printPercent = new double[SIZE];
 
         for (int i = 0; i < SIZE; i++) {
-            String[] ary = input.readLine().split(" ");
+            String[] ary = input.readLine().split("");
             int member = Integer.parseInt(ary[0]);
             int sum = 0;
             int pass = 0;
@@ -103,7 +103,7 @@ public class BasicArray {
             double averg = (double) sum / member;
 
             for (int j = 1; j < member + 1; j++) {
-                if (Integer.parseInt(ary[j]) > averg) pass+=1;
+                if (Integer.parseInt(ary[j]) > averg) pass += 1;
             }
 
             double percent = ((double) pass / member) * 100;
@@ -118,11 +118,35 @@ public class BasicArray {
         output.close();
     }
 
+    public static void QuizAns() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        int[] sum = new int[SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            String[] ans = input.readLine().split("");
+            int grade = 0;
+            for (String yans : ans) {
+                if (yans.equals("O")) {
+                    grade += 1;
+                    sum[i] += grade;
+                } else grade = 0;
+            }
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int i = 0; i < SIZE; i++) {
+            output.write(sum[i] + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
 //        CountNums();
 //        Averg();
-        OverAverg();
+//        OverAverg();
+        QuizAns();
     }
 }
