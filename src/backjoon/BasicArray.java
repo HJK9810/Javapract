@@ -95,25 +95,24 @@ public class BasicArray {
             String[] ary = input.readLine().split(" ");
             int member = Integer.parseInt(ary[0]);
             int sum = 0;
-            double averg;
             int pass = 0;
 
             for (int j = 1; j < member + 1; j++) {
                 sum += Integer.parseInt(ary[j]);
             }
-            averg = (double) (sum / member);
+            double averg = (double) sum / member;
 
             for (int j = 1; j < member + 1; j++) {
-                if (Integer.parseInt(ary[j]) >= averg) pass += 1;
+                if (Integer.parseInt(ary[j]) > averg) pass+=1;
             }
 
-            double percent = (double) (pass / member) * 100;
+            double percent = ((double) pass / member) * 100;
             printPercent[i] = percent;
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
         for (double percent : printPercent) {
-            output.write(percent + "%\n");
+            output.write(Math.round(percent * 1000) / 1000.0 + "%\n");
         }
         output.flush();
         output.close();
