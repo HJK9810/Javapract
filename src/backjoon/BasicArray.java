@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class BasicArray {
     public static void MinAndMax() throws IOException {
@@ -141,12 +142,27 @@ public class BasicArray {
         output.close();
     }
 
+    public static void RestVal() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        HashSet<Integer> restVal = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            int number = Integer.parseInt(input.readLine());
+            restVal.add(number % 42);
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(restVal.size() + "\n");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
 //        CountNums();
 //        Averg();
 //        OverAverg();
-        QuizAns();
+//        QuizAns();
+        RestVal();
     }
 }
