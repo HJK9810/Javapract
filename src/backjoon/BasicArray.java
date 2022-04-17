@@ -93,7 +93,7 @@ public class BasicArray {
         double[] printPercent = new double[SIZE];
 
         for (int i = 0; i < SIZE; i++) {
-            String[] ary = input.readLine().split("");
+            String[] ary = input.readLine().split(" ");
             int member = Integer.parseInt(ary[0]);
             int sum = 0;
             int pass = 0;
@@ -113,7 +113,7 @@ public class BasicArray {
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
         for (double percent : printPercent) {
-            output.write(Math.round(percent * 1000) / 1000.0 + "%\n");
+            output.write(String.format("%.3f", percent) + "%\n");
         }
         output.flush();
         output.close();
@@ -161,8 +161,8 @@ public class BasicArray {
 //        Max();
 //        CountNums();
 //        Averg();
-//        OverAverg();
+        OverAverg();
 //        QuizAns();
-        RestVal();
+//        RestVal();
     }
 }
