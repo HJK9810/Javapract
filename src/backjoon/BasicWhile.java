@@ -48,8 +48,26 @@ public class BasicWhile {
         System.out.println(count);
     }
 
+    public static void untilEOF() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder str = new StringBuilder();
+        String line;
+
+        while((line = input.readLine()) != null) {
+            int num1 = line.charAt(0) - '0';
+            int num2 = line.charAt(2) - '0';
+            int sum = num1 + num2;
+            str.append(sum ).append("\n");
+        }
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(String.valueOf(str));
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        Plus4();
-        CiclePlus();
+//        CiclePlus();
+        untilEOF();
     }
 }
