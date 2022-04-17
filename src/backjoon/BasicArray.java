@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class BasicArray {
@@ -71,18 +72,17 @@ public class BasicArray {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int SIZE = Integer.parseInt(input.readLine());
         String[] grades = input.readLine().split(" ");
-        Arrays.sort(grades);
-        float sum = 0;
-        float max = Integer.parseInt(grades[SIZE - 1]);
+        Arrays.sort(grades, Collections.reverseOrder());
+        double sum = 0;
+        float max = Integer.parseInt(grades[0]);
 
         for (String grade : grades) {
-            float intgrade = Integer.parseInt(grade);
-            float now = (intgrade / max) * 100;
-            sum = sum + now;
+            sum += Integer.parseInt(grade);
         }
+        sum = sum / max * 100 ; // 변경시킨 총 합 = (기존성정 총합) / max값 * 100
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write((sum / SIZE) + "\n");
+        output.write(sum / SIZE + "\n");
         output.flush();
         output.close();
     }
@@ -160,8 +160,8 @@ public class BasicArray {
 //        MinAndMax();
 //        Max();
 //        CountNums();
-//        Averg();
-        OverAverg();
+        Averg();
+//        OverAverg();
 //        QuizAns();
 //        RestVal();
     }
