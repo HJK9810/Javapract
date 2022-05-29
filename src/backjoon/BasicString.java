@@ -62,8 +62,24 @@ public class BasicString {
 		output.flush();
 		output.close();
 	}
+
+	public static void checkAlph() throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		String str = input.readLine();
+		String alph = "abcdefghijklmnopqrstuvwxyz";
+		StringBuffer index = new StringBuffer();
+
+		for(int i=0;i<alph.length();i++){
+			index.append(String.format("%d ", str.indexOf(alph.charAt(i))));
+		}
+
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		output.write(index.toString());
+		output.flush();
+		output.close();
+	}
 	
 	public static void main(String[] args) throws IOException {
-		
+		checkAlph();
 	}
 }
