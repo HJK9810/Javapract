@@ -123,9 +123,24 @@ public class BasicString {
         output.close();
     }
 
+    public static void countWord() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] words = input.readLine().split(" ");
+        int leng = words.length;
+        for(String word : words) {
+            if(word.equals("")) leng--;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(leng + "\n");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
 //        repeatStr();
-        comparReverNum();
+//        comparReverNum();
+        countWord();
     }
 }
