@@ -78,8 +78,29 @@ public class BasicString {
 		output.flush();
 		output.close();
 	}
+
+	public static void repeatStr() throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		final int textCase = Integer.parseInt(input.readLine());
+		StringBuilder str = new StringBuilder();
+
+		for (int i=0;i<textCase;i++) {
+			String[] line = input.readLine().split(" ");
+			int repeatNum = Integer.parseInt(line[0]);
+			for(String alph : line[1].split("")) {
+				str.append(alph.repeat(repeatNum));
+			}
+			str.append("\n");
+		}
+
+		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+		output.write(str.toString());
+		output.flush();
+		output.close();
+	}
 	
 	public static void main(String[] args) throws IOException {
-		checkAlph();
+//		checkAlph();
+		repeatStr();
 	}
 }
