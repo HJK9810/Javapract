@@ -67,7 +67,7 @@ public class BasicString {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		String str = input.readLine();
 		String alph = "abcdefghijklmnopqrstuvwxyz";
-		StringBuffer index = new StringBuffer();
+		StringBuilder index = new StringBuilder();
 
 		for(int i=0;i<alph.length();i++){
 			index.append(String.format("%d ", str.indexOf(alph.charAt(i))));
