@@ -99,8 +99,33 @@ public class BasicString {
         output.close();
     }
 
+    public static int numReverse(int num) {
+        int result = 0;
+        while (num != 0) {
+            result = result * 10 + num % 10;
+            num /= 10;
+        }
+        return result;
+    }
+
+    public static void comparReverNum() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] numbers = input.readLine().split(" ");
+
+        int num1 = numReverse(Integer.parseInt(numbers[0]));
+        int num2 = numReverse(Integer.parseInt(numbers[1]));
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        if (num1 > num2) output.write(num1 + "\n");
+        else output.write(num2 + "\n");
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
-        repeatStr();
+//        repeatStr();
+        comparReverNum();
     }
 }
