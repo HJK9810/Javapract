@@ -1,5 +1,7 @@
 package programmers;
 
+import java.util.*;
+
 public class Pract {
     private long[] SequenceXd(int x, int n) {
         long[] answer = new long[n];
@@ -23,6 +25,19 @@ public class Pract {
             }
         }
         return count;
+    }
+
+    private int[] DelMinNum(int[] arr) {
+        if(arr.length == 1) return new int[]{-1};
+        int min = Integer.MAX_VALUE;
+        for(int num : arr) {
+            if(min > num) min = num;
+        }
+
+        int finalMin = min;
+        int[] answer = Arrays.stream(arr).filter(el -> el != finalMin).toArray();
+
+        return answer;
     }
 
     public static void main(String[] args) {
