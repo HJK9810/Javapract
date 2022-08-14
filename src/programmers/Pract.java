@@ -40,6 +40,12 @@ public class Pract {
         return answer;
     }
 
+    private int[] ReverseNum(long n) {
+        List<String> forReverse = Arrays.asList(Long.toString(n).split(""));
+        Collections.reverse(forReverse);
+        return Arrays.stream(forReverse.toArray(Long.toString(n).split(""))).mapToInt(Integer::parseInt).toArray();
+    }
+
     public static void main(String[] args) {
         Pract pract = new Pract();
 
