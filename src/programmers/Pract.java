@@ -79,8 +79,8 @@ public class Pract {
         ary[0] = ary[1] = false;
 
         for (int i = 2; i * i <= n; i++) {
-            if(ary[i]) {
-                for (int j = i * i; j <= n; j++) {
+            if (ary[i]) {
+                for (int j = i * i; j <= n; j += i) {
                     ary[j] = false;
                 }
             }
