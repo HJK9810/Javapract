@@ -28,10 +28,10 @@ public class Pract {
     }
 
     private int[] DelMinNum(int[] arr) {
-        if(arr.length == 1) return new int[]{-1};
+        if (arr.length == 1) return new int[]{-1};
         int min = Integer.MAX_VALUE;
-        for(int num : arr) {
-            if(min > num) min = num;
+        for (int num : arr) {
+            if (min > num) min = num;
         }
 
         int finalMin = min;
@@ -46,13 +46,31 @@ public class Pract {
         return Arrays.stream(forReverse.toArray(Long.toString(n).split(""))).mapToInt(Integer::parseInt).toArray();
     }
 
+    private String ChangeStrangeWord(String s) {
+        String[] answer = s.split(" ");
+        for (int i = 0; i < answer.length; i++) {
+            String[] ary = answer[i].split("");
+            for (int j = 0; j < ary.length; j++) {
+                ary[j] = (j % 2 == 0) ? ary[j].toUpperCase() : ary[j].toLowerCase();
+            }
+            answer[i] = String.join("", ary);
+        }
+
+        return String.join(" ", answer);
+    }
+
     public static void main(String[] args) {
         Pract pract = new Pract();
 
         // 콜라츠 추측
-        System.out.println(pract.CollatzSearch(6));
-        System.out.println(pract.CollatzSearch(16));
-        System.out.println(pract.CollatzSearch(626331));
-        System.out.println(pract.CollatzSearch(1));
+//        System.out.println(pract.CollatzSearch(6));
+//        System.out.println(pract.CollatzSearch(16));
+//        System.out.println(pract.CollatzSearch(626331));
+//        System.out.println(pract.CollatzSearch(1));
+
+        // 이상한 문자 만들기
+        System.out.println(pract.ChangeStrangeWord("try hello world").equals("TrY HeLlO WoRlD"));
+        System.out.println(pract.ChangeStrangeWord(" try hello world").equals(" TrY HeLlO WoRlD"));
+        System.out.println(pract.ChangeStrangeWord("try hello world ").equals("TrY HeLlO WoRlD "));
     }
 }
