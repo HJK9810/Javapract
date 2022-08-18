@@ -47,16 +47,15 @@ public class Pract {
     }
 
     private String ChangeStrangeWord(String s) {
-        String[] answer = s.split(" ");
+        String[] answer = s.split("");
+        int cnt = 0;
+
         for (int i = 0; i < answer.length; i++) {
-            String[] ary = answer[i].split("");
-            for (int j = 0; j < ary.length; j++) {
-                ary[j] = (j % 2 == 0) ? ary[j].toUpperCase() : ary[j].toLowerCase();
-            }
-            answer[i] = String.join("", ary);
+            cnt = answer[i].equals(" ") ? 0 : cnt + 1;
+            answer[i] = cnt % 2 == 1 ? answer[i].toUpperCase() : answer[i].toLowerCase();
         }
 
-        return String.join(" ", answer);
+        return String.join("", answer);
     }
 
     public static void main(String[] args) {
