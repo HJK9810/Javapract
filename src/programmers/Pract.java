@@ -58,6 +58,20 @@ public class Pract {
         return String.join("", answer);
     }
 
+    private boolean CheckPandY(String s) {
+        s = s.toLowerCase();
+        int p = 0;
+        int y = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char alph = s.charAt(i);
+            if (alph == 'p') p++;
+            else if (alph == 'y') y++;
+        }
+
+        return p == y ? true : false;
+    }
+
     public static void main(String[] args) {
         Pract pract = new Pract();
 
