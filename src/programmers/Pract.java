@@ -72,6 +72,26 @@ public class Pract {
         return p == y ? true : false;
     }
 
+    private int CheckDecimal(int n) {
+        boolean ary[] = new boolean[n + 1];
+        int answer = 0;
+        Arrays.fill(ary, true);
+        ary[0] = ary[1] = false;
+
+        for (int i = 2; i * i <= n; i++) {
+            if(ary[i]) {
+                for (int j = i * i; j <= n; j++) {
+                    ary[j] = false;
+                }
+            }
+        }
+
+        for (int i = 0; i <= n; i++) {
+            if (ary[i]) answer++;
+        }
+        return answer;
+    }
+
     public static void main(String[] args) {
         Pract pract = new Pract();
 
@@ -82,8 +102,11 @@ public class Pract {
 //        System.out.println(pract.CollatzSearch(1));
 
         // 이상한 문자 만들기
-        System.out.println(pract.ChangeStrangeWord("try hello world").equals("TrY HeLlO WoRlD"));
-        System.out.println(pract.ChangeStrangeWord(" try hello world").equals(" TrY HeLlO WoRlD"));
-        System.out.println(pract.ChangeStrangeWord("try hello world ").equals("TrY HeLlO WoRlD "));
+//        System.out.println(pract.ChangeStrangeWord("try hello world").equals("TrY HeLlO WoRlD"));
+//        System.out.println(pract.ChangeStrangeWord(" try hello world").equals(" TrY HeLlO WoRlD"));
+//        System.out.println(pract.ChangeStrangeWord("try hello world ").equals("TrY HeLlO WoRlD "));
+        // 소수찾기
+        System.out.println(pract.CheckDecimal(10));
+        System.out.println(pract.CheckDecimal(5));
     }
 }
