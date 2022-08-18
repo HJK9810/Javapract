@@ -96,11 +96,11 @@ public class Pract {
         List<String> list = new ArrayList<>();
         String[] answer = new String[strings.length];
 
-        for(String word : strings) {
+        for (String word : strings) {
             list.add(word.charAt(n) + word);
         }
         Collections.sort(list);
-        for(int i=0;i<list.size();i++) {
+        for (int i = 0; i < list.size(); i++) {
             answer[i] = list.get(i).substring(1);
         }
 
@@ -110,6 +110,24 @@ public class Pract {
     private String FindKim(String[] seoul) {
         List<String> names = new ArrayList<>(Arrays.asList(seoul));
         return "김서방은 " + names.indexOf("Kim") + "에 있다";
+    }
+
+    private String CaesarCode(String s, int n) {
+        StringBuffer answer = new StringBuffer();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                char alph = s.charAt(i);
+                int ascii = (int) alph + n;
+
+                if (alph == Character.toLowerCase(alph) && ascii > (int) 'z') {
+                    ascii = (ascii - (int) 'z' - 1) + (int) 'a';
+                } else if (alph == Character.toUpperCase(alph) && ascii > (int) 'Z') {
+                    ascii = (ascii - (int) 'Z' - 1) + (int) 'A';
+                }
+                answer.append(Character.toString((char) ascii));
+            } else answer.append(" ");
+        }
+        return answer.toString();
     }
 
     public static void main(String[] args) {
@@ -126,7 +144,11 @@ public class Pract {
 //        System.out.println(pract.ChangeStrangeWord(" try hello world").equals(" TrY HeLlO WoRlD"));
 //        System.out.println(pract.ChangeStrangeWord("try hello world ").equals("TrY HeLlO WoRlD "));
         // 소수찾기
-        System.out.println(pract.CheckDecimal(10));
-        System.out.println(pract.CheckDecimal(5));
+//        System.out.println(pract.CheckDecimal(10));
+//        System.out.println(pract.CheckDecimal(5));
+        // 시저암호
+        System.out.println(pract.CaesarCode("AB", 1));
+        System.out.println(pract.CaesarCode("z", 1));
+        System.out.println(pract.CaesarCode("a B z", 4));
     }
 }
