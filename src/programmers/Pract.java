@@ -107,6 +107,11 @@ public class Pract {
         return answer;
     }
 
+    private String FindKim(String[] seoul) {
+        List<String> names = new ArrayList<>(Arrays.asList(seoul));
+        return "김서방은 " + names.indexOf("Kim") + "에 있다";
+    }
+
     public static void main(String[] args) {
         Pract pract = new Pract();
 
