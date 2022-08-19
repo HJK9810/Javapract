@@ -15,10 +15,10 @@ public class Hash {
         Arrays.sort(participant);
         Arrays.sort(completion);
 
-        for (int i = 0; i < participant.length; i++) {
+        for (int i = 0; i < completion.length; i++) {
             if (!participant[i].equals(completion[i])) return participant[i];
         }
-        return "";
+        return participant[participant.length - 1];
     }
 
     public static void main(String[] args) {
