@@ -16,7 +16,7 @@ public class Greedy {
                 l = 1;
             }
             if (Arrays.stream(reserve).anyMatch(s -> s == finalI)) {
-                stus[i] = 0;
+                stus[i] = 2;
                 r = 1;
             }
 
@@ -38,6 +38,10 @@ public class Greedy {
     }
 
     public static void main(String[] args) {
+        Greedy greedy = new Greedy();
 
+        System.out.println(greedy.Uniform(5, new int[]{2, 4}, new int[]{1, 3, 5}));
+        System.out.println(greedy.Uniform(5, new int[]{2, 4}, new int[]{3}));
+        System.out.println(greedy.Uniform(3, new int[]{3}, new int[]{1}));
     }
 }
