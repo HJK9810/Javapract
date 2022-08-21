@@ -28,7 +28,8 @@ public class WebBack21 {
         for (int i = 0; i < lottos.length; i++) {
             if (lottos[i] == 0) zero = i + 1;
             else {
-                if (Arrays.asList(win_nums).contains(lottos[i])) count++;
+                int finalI = i;
+                if (Arrays.stream(win_nums).anyMatch(s -> s == lottos[finalI])) count++;
             }
         }
 
