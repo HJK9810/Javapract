@@ -5,9 +5,13 @@ import java.util.*;
 public class Blind22 {
     private int[] Report(String[] id_list, String[] report, int k) {
         HashMap<String, HashSet<String>> checks = new HashMap<>();
+        HashMap<String, HashSet<String>> forReport = new HashMap<>();
         for(String name : id_list) {
-            HashSet<String> set = new HashSet<>();
-            checks.put(name, set);
+            HashSet<String> set1 = new HashSet<>();
+            checks.put(name, set1);
+
+            HashSet<String> set2 = new HashSet<>();
+            forReport.put(name, set2);
         }
 
         for(String line : report) {
@@ -15,11 +19,23 @@ public class Blind22 {
             HashSet<String> set = checks.get(names[1]);
             set.add(names[0]);
             checks.put(names[1], set);
+
+            HashSet<String> set2 = forReport.get(names[0]);
+            set2.add(names[1]);
+            forReport.put(names[0], set2);
         }
-        int[] answer = new int[id_list.length];
-        int idx = 0;
+        StringBuffer sb = new StringBuffer();
         for(String key : checks.keySet()) {
-            answer[idx] = checks.get(key).size();
+            if (checks.get(key).size() >= k) sb.append(key + " ");
+        }
+
+        int[] answer = new int[id_list.length];
+        for(String key : forReport.keySet()) {
+            String[] names = sb.toString().split(" ");
+            int idx = Arrays.asList(id_list).indexOf(key);
+            for(String name : names) {
+                if(forReport.get(key).contains(name)) answer[idx]++;
+            }
         }
         return answer;
     }
