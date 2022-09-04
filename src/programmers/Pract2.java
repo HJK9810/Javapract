@@ -1,40 +1,21 @@
 package programmers;
 
 public class Pract2 {
-    private static int[] pact;
+    private static int[] dp;
 
-    private static int pactorial(int num) {
-        pact[0] = 1;
-        for (int i = 1; i <= num; i++) {
-            pact[i] = pact[i - 1] * i;
+    private static int fibo(int num) {
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= num; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
-        return pact[num];
+
+        return dp[num];
     }
 
     private int Nx2Tiling(int n) {
-        int answer = 0;
-        int countTwo = n / 2;
-        int countOne = 0;
-        int add = 0;
-        pact = new int[n + 1];
-        pactorial(n);
-
-        if (n % 2 == 1) {
-            n -= 1;
-            countTwo = n / 2;
-            answer += (countTwo + 1);
-            add = 1;
-        } else answer += 2;
-
-        int i = 1;
-        while (countTwo != 1) {
-            countTwo = n / 2 - i;
-            countOne = i * 2 + add;
-            answer += (pact[countOne + countTwo] / (pact[countOne] * pact[countTwo]));
-            i++;
-        }
-
-        return answer;
+        dp = new int[n + 1];
+        return fibo(n) % 1000000007;
     }
 
 
