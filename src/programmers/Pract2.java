@@ -8,6 +8,7 @@ public class Pract2 {
         dp[2] = 2;
         for (int i = 3; i <= num; i++) {
             dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] %= 1000000007;
         }
 
         return dp[num];
@@ -15,7 +16,7 @@ public class Pract2 {
 
     private int Nx2Tiling(int n) {
         dp = new int[n + 1];
-        return fibo(n) % 1000000007;
+        return fibo(n);
     }
 
 
