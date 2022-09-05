@@ -167,6 +167,8 @@ public class BasicString {
             if (i == str.length() - 2) find = str.substring(i);
             else find = str.substring(i, i + 2);
 
+            if (find.equals("dz") && i != str.length() - 2 && str.charAt(i + 2) == '=') find += "=";
+
             int idx = basic.indexOf(find);
             if (idx != -1) {
                 ans++;
