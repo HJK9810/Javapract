@@ -51,7 +51,7 @@ public class EasyCalculate {
         return 0;
     }
 
-    public static void main(String[] args) {
+    private void PlusfUpgrade() {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
         int[] sum = new int[n];
@@ -65,5 +65,9 @@ public class EasyCalculate {
         for (int j : sum) {
             System.out.println(j);
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
