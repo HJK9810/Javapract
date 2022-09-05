@@ -37,6 +37,36 @@ public class Pract2 {
         return moves.toArray(new int[moves.size()][2]);
     }
 
+    private int[] pacto;
+
+    private void pactorial(int n) {
+        pacto[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            pacto[i] = pacto[i - 1] * i;
+        }
+    }
+
+    private int[] LineSol(int n, long k) {
+        List<Integer> answer = new ArrayList<>();
+        List<Integer> nums = new ArrayList<>();
+        pacto = new int[n + 1];
+        pactorial(n);
+        for (int i = 0; i < n; i++) {
+            nums.add(i + 1);
+        }
+
+        while (nums.size() > 1) {
+            int num = (int) Math.ceil((double) k / pacto[n - 1]) - 1;
+            int number = nums.get(num);
+            nums.remove(num);
+            answer.add(number);
+            k %= pacto[n - 1];
+            n--;
+        }
+        answer.add(nums.get(0));
+        return answer.stream().mapToInt(Integer::intValue).toArray();
+    }
+
 
     // level2 연습문제
     public static void main(String[] args) {
@@ -47,6 +77,9 @@ public class Pract2 {
 //        System.out.println(pract2.Nx2Tiling(4) == 5);
 
         // 하노이의 탑
-        System.out.println(Arrays.toString(pract2.TowerOfHanoi(2)));
+//        System.out.println(Arrays.toString(pract2.TowerOfHanoi(2)));
+
+        // 줄세우기
+        System.out.println(Arrays.toString(pract2.LineSol(3, 5)));
     }
 }
