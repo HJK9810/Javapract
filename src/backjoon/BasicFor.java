@@ -84,10 +84,32 @@ public class BasicFor {
         output.close();
     }
 
+    private static void Receipt() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int recep = Integer.parseInt(input.readLine());
+        final int SIZE = Integer.parseInt(input.readLine());
+        int sum = 0;
+
+        for(int i=0;i<SIZE;i++) {
+            String s = input.readLine();
+            StringTokenizer st = new StringTokenizer(s);
+            int num1 = Integer.parseInt(st.nextToken());
+            int num2 = Integer.parseInt(st.nextToken());
+            sum += (num1 * num2);
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        if(recep == sum) output.write("Yes");
+        else output.write("No");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        NineXNine();
 //        Plus7();
 //        Plus8();
-        QuickPlus();
+//        QuickPlus();
+        Receipt();
     }
 }
