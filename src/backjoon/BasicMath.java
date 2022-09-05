@@ -1,15 +1,27 @@
 package backjoon;
 
-import java.util.Scanner;
+import java.io.*;
 
 public class BasicMath {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int A = input.nextInt(); // 고정비용
-        int B = input.nextInt(); // 가변비용
-        int C = input.nextInt(); //가격
-        int profit = C - B;
+    private void BreakEventPoint() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] data = input.readLine().split(" ");
+        int A = Integer.parseInt(data[0]); // 고정비용
+        int B = Integer.parseInt(data[1]); // 가변비용
+        int C = Integer.parseInt(data[2]); //가격
+        double profit = C - B;
 
-        System.out.println(A / profit + 1);
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        if (profit <= 0) output.write("-1");
+        else output.write((int) (A / profit + 1) + "");
+
+        output.flush();
+        output.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        BasicMath basicMath = new BasicMath();
+
+        basicMath.BreakEventPoint();
     }
 }

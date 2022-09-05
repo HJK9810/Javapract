@@ -127,8 +127,8 @@ public class BasicString {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] words = input.readLine().split(" ");
         int leng = words.length;
-        for(String word : words) {
-            if(word.equals("")) leng--;
+        for (String word : words) {
+            if (word.equals("")) leng--;
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -137,10 +137,58 @@ public class BasicString {
         output.close();
     }
 
+    private static void Dial() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] basic = {"ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
+        String[] alph = input.readLine().split("");
+        int ans = 0;
+
+        for (String check : alph) {
+            for (int i = 0; i < basic.length; i++) {
+                if (basic[i].contains(check)) {
+                    ans += (i + 3);
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+
+    private static void CroatiaAlph() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        List<String> basic = new ArrayList<>(List.of(new String[]{"dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z="}));
+        int ans = 0;
+        int minus = 0;
+        String str = input.readLine();
+
+        for (int i = 0; i < str.length() - 1; i++) {
+            String find;
+            if (i == str.length() - 2) find = str.substring(i);
+            else find = str.substring(i, i + 2);
+
+            if (find.equals("dz") && i != str.length() - 2 && str.charAt(i + 2) == '=') find += "=";
+
+            int idx = basic.indexOf(find);
+            if (idx != -1) {
+                ans++;
+                minus += 2;
+                if (idx == 0) {
+                    i += 2;
+                    minus++;
+                } else i++;
+            }
+        }
+
+        System.out.println(ans + (str.length() - minus));
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
 //        repeatStr();
 //        comparReverNum();
-        countWord();
+//        countWord();
+//        Dial();
+        CroatiaAlph();
     }
 }

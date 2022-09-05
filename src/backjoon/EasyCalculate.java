@@ -1,5 +1,6 @@
 package backjoon;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class EasyCalculate {
@@ -51,7 +52,7 @@ public class EasyCalculate {
         return 0;
     }
 
-    public static void main(String[] args) {
+    private void PlusfUpgrade() {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
         int[] sum = new int[n];
@@ -65,5 +66,28 @@ public class EasyCalculate {
         for (int j : sum) {
             System.out.println(j);
         }
+    }
+
+    private void Chess() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        int[] origin = {1, 1, 2, 2, 2, 8};
+        String[] pins = input.readLine().split(" ");
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < pins.length; i++) {
+            int num = origin[i] - Integer.parseInt(pins[i]);
+            sb.append(num + " ");
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(sb.toString());
+        output.flush();
+        output.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        EasyCalculate easyCalculate = new EasyCalculate();
+
+        // 킹, 퀸, 룩, 비숍, 나이트, 폰
+        easyCalculate.Chess();
     }
 }

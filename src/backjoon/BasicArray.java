@@ -72,17 +72,21 @@ public class BasicArray {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int SIZE = Integer.parseInt(input.readLine());
         String[] grades = input.readLine().split(" ");
-        Arrays.sort(grades, Collections.reverseOrder());
-        double sum = 0;
-        float max = Integer.parseInt(grades[0]);
+        float[] record = new float[SIZE];
+        float max = 0;
+        float avg = 0;
 
-        for (String grade : grades) {
-            sum += Integer.parseInt(grade);
+        for(int i = 0; i < grades.length; i++) {
+            record[i] = Float.parseFloat(grades[i]);
+            if(record[i] > max) max = record[i];
         }
-        sum = sum / max * 100 ; // 변경시킨 총 합 = (기존성정 총합) / max값 * 100
+
+        for (float grade : record) {
+            avg += (grade / max * 100) / SIZE;
+        }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write(sum / SIZE + "\n");
+        output.write(avg + "");
         output.flush();
         output.close();
     }
