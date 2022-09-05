@@ -127,8 +127,8 @@ public class BasicString {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] words = input.readLine().split(" ");
         int leng = words.length;
-        for(String word : words) {
-            if(word.equals("")) leng--;
+        for (String word : words) {
+            if (word.equals("")) leng--;
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -137,10 +137,29 @@ public class BasicString {
         output.close();
     }
 
+    private static void Dial() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] basic = {"ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
+        String[] alph = input.readLine().split("");
+        int ans = 0;
+
+        for (String check : alph) {
+            for (int i = 0; i < basic.length; i++) {
+                if (basic[i].contains(check)) {
+                    ans += (i + 3);
+                    break;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
 //        repeatStr();
 //        comparReverNum();
-        countWord();
+//        countWord();
+        Dial();
     }
 }
