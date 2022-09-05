@@ -55,13 +55,14 @@ public class Pract2 {
             nums.add(i + 1);
         }
 
-        while (nums.size() > 1) {
-            int num = (int) Math.ceil((double) k / pacto[n - 1]) - 1;
+        for (int i = n - 1; i > 0; i--) {
+            int num;
+            if(k % pacto[i] == 0) num = (int) (k / pacto[i] - 1);
+            else num = (int) (k / pacto[i]);
             int number = nums.get(num);
             nums.remove(num);
             answer.add(number);
-            k %= pacto[n - 1];
-            n--;
+            k %= pacto[i];
         }
         answer.add(nums.get(0));
         return answer.stream().mapToInt(Integer::intValue).toArray();
