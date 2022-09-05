@@ -72,16 +72,21 @@ public class BasicArray {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int SIZE = Integer.parseInt(input.readLine());
         String[] grades = input.readLine().split(" ");
-        Arrays.sort(grades, Collections.reverseOrder());
-        float sum = 0;
-        float max = Integer.parseInt(grades[0]);
+        float[] record = new float[SIZE];
+        float max = 0;
+        float avg = 0;
 
-        for (String grade : grades) {
-            sum += (Float.parseFloat(grade) / max * 100) / SIZE;
+        for(int i = 0; i < grades.length; i++) {
+            record[i] = Float.parseFloat(grades[i]);
+            if(record[i] > max) max = record[i];
+        }
+
+        for (float grade : record) {
+            avg += (grade / max * 100) / SIZE;
         }
 
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write(sum + "\n");
+        output.write(avg + "");
         output.flush();
         output.close();
     }
