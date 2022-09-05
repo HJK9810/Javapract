@@ -11,15 +11,9 @@ public class BasicMath {
         int C = Integer.parseInt(data[2]); //가격
         double profit = C - B;
 
-
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        if (profit < 0 || A == 0) output.write("-1");
-        else {
-            double cal = A / profit;
-
-            if (cal > (int) cal) output.write(Math.ceil(cal) + "");
-            else output.write(((int) cal + 1) + "");
-        }
+        if (profit <= 0) output.write("-1");
+        else output.write((int) (A / profit + 1) + "");
 
         output.flush();
         output.close();
