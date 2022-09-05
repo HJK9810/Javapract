@@ -155,11 +155,38 @@ public class BasicString {
         System.out.println(ans);
     }
 
+    private static void CroatiaAlph() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        List<String> basic = new ArrayList<>(List.of(new String[]{"dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z="}));
+        int ans = 0;
+        int minus = 0;
+        String str = input.readLine();
+
+        for (int i = 0; i < str.length() - 1; i++) {
+            String find;
+            if (i == str.length() - 2) find = str.substring(i);
+            else find = str.substring(i, i + 2);
+
+            int idx = basic.indexOf(find);
+            if (idx != -1) {
+                ans++;
+                minus += 2;
+                if (idx == 0) {
+                    i += 2;
+                    minus++;
+                } else i++;
+            }
+        }
+
+        System.out.println(ans + (str.length() - minus));
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
 //        repeatStr();
 //        comparReverNum();
 //        countWord();
-        Dial();
+//        Dial();
+        CroatiaAlph();
     }
 }
