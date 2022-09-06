@@ -66,7 +66,26 @@ public class BasicMath {
     }
 
     private void CheckPeople() throws IOException { // 부녀회장이 될테야
+        int[][] people = new int[15][15];
+        people[0][0] = 1;
+        for (int i = 0; i < 15; i++) {
+            for (int j = 1; j < 15; j++) {
+                if (i == 0) people[i][j] = j;
+                else if (j == 1) people[i][j] = 1;
+                else people[i][j] = people[i - 1][j] + people[i][j - 1];
+            }
+        }
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        StringBuffer str = new StringBuffer();
 
+        for (int i = 0; i < SIZE; i++) {
+            int k = Integer.parseInt(input.readLine());
+            int N = Integer.parseInt(input.readLine());
+
+            str.append(people[k][N] + "\n");
+        }
+        System.out.println(str);
     }
 
     private void SugarDeliv() throws IOException { // 설탕배달
@@ -103,6 +122,7 @@ public class BasicMath {
 //        basicMath.HoneyBeeHouse();
 //        basicMath.SnailUp();
 //        basicMath.ACMHotel();
+        basicMath.CheckPeople();
 //        basicMath.SugarDeliv();
 //        basicMath.BigIntPlus();
     }
