@@ -4,7 +4,7 @@ import java.io.*;
 import java.math.BigInteger;
 
 public class BasicMath {
-    private void BreakEventPoint() throws IOException {
+    private void BreakEventPoint() throws IOException { // 손익분기점
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] data = input.readLine().split(" ");
         int A = Integer.parseInt(data[0]); // 고정비용
@@ -20,7 +20,7 @@ public class BasicMath {
         output.close();
     }
 
-    private void HoneyBeeHouse() throws IOException {
+    private void HoneyBeeHouse() throws IOException { // 벌집
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int number = Integer.parseInt(input.readLine());
         int count = 1;
@@ -37,7 +37,7 @@ public class BasicMath {
         }
     }
 
-    private void SnailUp() throws IOException {
+    private void SnailUp() throws IOException { // 달팽이는 올라가고싶다
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] data = input.readLine().split(" ");
         int A = Integer.parseInt(data[0]); // 낮에 올라가는 거리
@@ -47,7 +47,7 @@ public class BasicMath {
         System.out.println(days);
     }
 
-    private void ACMHotel() throws IOException {
+    private void ACMHotel() throws IOException { // ACM 호텔
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         final int SIZE = Integer.parseInt(input.readLine());
         StringBuffer answer = new StringBuffer();
@@ -65,7 +65,11 @@ public class BasicMath {
         System.out.println(answer.toString());
     }
 
-    private void SugarDeliv() throws IOException {
+    private void CheckPeople() throws IOException { // 부녀회장이 될테야
+
+    }
+
+    private void SugarDeliv() throws IOException { // 설탕배달
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         int gram = Integer.parseInt(input.readLine());
         int ans = 0;
@@ -83,7 +87,7 @@ public class BasicMath {
         System.out.println(-1);
     }
 
-    private void BigIntPlus() throws IOException {
+    private void BigIntPlus() throws IOException { // 큰 수 A + B
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] data = input.readLine().split(" ");
         BigInteger num1 = new BigInteger(data[0]);
@@ -98,7 +102,7 @@ public class BasicMath {
 //        basicMath.BreakEventPoint();
 //        basicMath.HoneyBeeHouse();
 //        basicMath.SnailUp();
-        basicMath.ACMHotel();
+//        basicMath.ACMHotel();
 //        basicMath.SugarDeliv();
 //        basicMath.BigIntPlus();
     }
