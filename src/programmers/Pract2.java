@@ -56,15 +56,23 @@ public class Pract2 {
         }
 
         for (int i = n - 1; i > 0; i--) {
-            int num;
-            if(k % pacto[i] == 0) num = (int) (k / pacto[i] - 1);
-            else num = (int) (k / pacto[i]);
-            int number = nums.get(num);
-            nums.remove(num);
-            answer.add(number);
-            k %= pacto[i];
+            int number = (int) (k / pacto[i]);
+            int remainder = (int) (k % pacto[i]);
+            answer.add(nums.get(number));
+            nums.remove(number);
+
+            if (remainder == 1) {
+                for (int num : nums) answer.add(num);
+                break;
+            } else if (remainder == 0) {
+                for (int j = nums.size() - 1; j >= 0; j--) {
+                    answer.add(nums.get(j));
+                }
+                break;
+            } else {
+                k = remainder;
+            }
         }
-        answer.add(nums.get(0));
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 
