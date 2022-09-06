@@ -36,10 +36,21 @@ public class BasicMath {
         }
     }
 
+    private void SnailUp() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] data = input.readLine().split(" ");
+        int A = Integer.parseInt(data[0]); // 낮에 올라가는 거리
+        int B = Integer.parseInt(data[1]); // 밤에 떨어지는 거리
+        int V = Integer.parseInt(data[2]); // 나무길이
+        int days = (int) Math.ceil((V - B) / (double) (A - B));
+        System.out.println(days);
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath basicMath = new BasicMath();
 
 //        basicMath.BreakEventPoint();
-        basicMath.HoneyBeeHouse();
+//        basicMath.HoneyBeeHouse();
+        basicMath.SnailUp();
     }
 }
