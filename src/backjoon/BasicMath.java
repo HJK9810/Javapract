@@ -55,13 +55,14 @@ public class BasicMath {
         while (gram >= 0) {
             if (gram % 5 == 0) {
                 ans += (gram / 5);
-                break;
+                System.out.println(ans);
+                return;
             }
             gram -= 3;
             ans++;
         }
 
-        System.out.println(ans);
+        System.out.println(-1);
     }
 
     private void BigIntPlus() throws IOException {
