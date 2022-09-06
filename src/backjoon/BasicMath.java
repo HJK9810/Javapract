@@ -49,21 +49,19 @@ public class BasicMath {
 
     private void SugarDeliv() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        final int gram = Integer.parseInt(input.readLine());
-        int min = Integer.MAX_VALUE;
+        int gram = Integer.parseInt(input.readLine());
+        int ans = 0;
 
-        if (gram < 5 && gram % 3 != 0) System.out.println(-1);
-        else {
-            for (int i = 0; i < gram / 5 + 1; i++) {
-                int n = gram - 5 * i;
-                if (n < 0) break;
-                if (n % 3 == 0) {
-                    min = Math.min(min, (n / 3 + i));
-                }
+        while (gram >= 0) {
+            if (gram % 5 == 0) {
+                ans += (gram / 5);
+                break;
             }
-
-            System.out.println(min);
+            gram -= 3;
+            ans++;
         }
+
+        System.out.println(ans);
     }
 
     private void BigIntPlus() throws IOException {
