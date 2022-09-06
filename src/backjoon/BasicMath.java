@@ -24,13 +24,16 @@ public class BasicMath {
         final int number = Integer.parseInt(input.readLine());
         int count = 1;
 
-        while (true) {
-            int cal = 3 * count * count;
-            if(number <= (cal - 3 * count) && number >= (cal - 9 * count)) break;
-            else count++;
-        }
+        if(number == 1) System.out.println(1);
+        else {
+            int range = 2;
+            while (range <= number) {
+                range += (count * 6);
+                count++;
+            }
 
-        System.out.println(count);
+            System.out.println(count);
+        }
     }
 
     public static void main(String[] args) throws IOException {
