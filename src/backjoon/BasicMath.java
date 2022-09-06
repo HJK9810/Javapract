@@ -25,7 +25,7 @@ public class BasicMath {
         final int number = Integer.parseInt(input.readLine());
         int count = 1;
 
-        if(number == 1) System.out.println(1);
+        if (number == 1) System.out.println(1);
         else {
             int range = 2;
             while (range <= number) {
@@ -47,6 +47,22 @@ public class BasicMath {
         System.out.println(days);
     }
 
+    private void SugarDeliv() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int gram = Integer.parseInt(input.readLine());
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < gram / 5 + 1; i++) {
+            int n = gram - 5 * i;
+            if (n < 0) break;
+            if (n % 3 == 0) {
+                min = Math.min(min, (n / 3 + i));
+            }
+        }
+
+        System.out.println(min);
+    }
+
     private void BigIntPlus() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] data = input.readLine().split(" ");
@@ -62,6 +78,7 @@ public class BasicMath {
 //        basicMath.BreakEventPoint();
 //        basicMath.HoneyBeeHouse();
 //        basicMath.SnailUp();
-        basicMath.BigIntPlus();
+        basicMath.SugarDeliv();
+//        basicMath.BigIntPlus();
     }
 }
