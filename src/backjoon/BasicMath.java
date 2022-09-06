@@ -19,9 +19,24 @@ public class BasicMath {
         output.close();
     }
 
+    private void HoneyBeeHouse() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int number = Integer.parseInt(input.readLine());
+        int count = 1;
+
+        while (true) {
+            int cal = 3 * count * count;
+            if(number <= (cal - 3 * count) && number >= (cal - 9 * count)) break;
+            else count++;
+        }
+
+        System.out.println(count);
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath basicMath = new BasicMath();
 
-        basicMath.BreakEventPoint();
+//        basicMath.BreakEventPoint();
+        basicMath.HoneyBeeHouse();
     }
 }
