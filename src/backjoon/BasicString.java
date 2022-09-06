@@ -183,12 +183,45 @@ public class BasicString {
         System.out.println(ans + (str.length() - minus));
     }
 
+    private static void GroupWordCheck() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        int answer = 0;
+
+        for (int i = 0; i < SIZE; i++) {
+            List<Character> alph = new ArrayList<>();
+            String word = input.readLine();
+
+            if (word.length() == 1) {
+                answer++;
+                continue;
+            }
+
+            char check = word.charAt(0);
+            boolean chekker = true;
+            alph.add(check);
+            for (int j = 1; j < word.length(); j++) {
+                if (check != word.charAt(j)) {
+                    check = word.charAt(j);
+                    if (alph.contains(check)) {
+                        chekker = false;
+                        break;
+                    } else alph.add(check);
+                }
+            }
+            if (chekker) answer++;
+        }
+
+        System.out.println(answer);
+    }
+
     public static void main(String[] args) throws IOException {
 //		checkAlph();
 //        repeatStr();
 //        comparReverNum();
 //        countWord();
 //        Dial();
-        CroatiaAlph();
+//        CroatiaAlph();
+        GroupWordCheck();
     }
 }
