@@ -52,15 +52,18 @@ public class BasicMath {
         final int gram = Integer.parseInt(input.readLine());
         int min = Integer.MAX_VALUE;
 
-        for (int i = 0; i < gram / 5 + 1; i++) {
-            int n = gram - 5 * i;
-            if (n < 0) break;
-            if (n % 3 == 0) {
-                min = Math.min(min, (n / 3 + i));
+        if (gram < 5 && gram % 3 != 0) System.out.println(-1);
+        else {
+            for (int i = 0; i < gram / 5 + 1; i++) {
+                int n = gram - 5 * i;
+                if (n < 0) break;
+                if (n % 3 == 0) {
+                    min = Math.min(min, (n / 3 + i));
+                }
             }
-        }
 
-        System.out.println(min);
+            System.out.println(min);
+        }
     }
 
     private void BigIntPlus() throws IOException {
