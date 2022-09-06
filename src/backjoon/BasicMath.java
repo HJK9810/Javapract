@@ -1,6 +1,7 @@
 package backjoon;
 
 import java.io.*;
+import java.math.BigInteger;
 
 public class BasicMath {
     private void BreakEventPoint() throws IOException {
@@ -46,11 +47,21 @@ public class BasicMath {
         System.out.println(days);
     }
 
+    private void BigIntPlus() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] data = input.readLine().split(" ");
+        BigInteger num1 = new BigInteger(data[0]);
+        BigInteger num2 = new BigInteger(data[0]);
+
+        System.out.println(num1.add(num2));
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath basicMath = new BasicMath();
 
 //        basicMath.BreakEventPoint();
 //        basicMath.HoneyBeeHouse();
-        basicMath.SnailUp();
+//        basicMath.SnailUp();
+        basicMath.BigIntPlus();
     }
 }
