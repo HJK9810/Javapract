@@ -47,6 +47,24 @@ public class BasicMath {
         System.out.println(days);
     }
 
+    private void ACMHotel() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        StringBuffer answer = new StringBuffer();
+
+        for (int i = 0; i < SIZE; i++) {
+            String[] data = input.readLine().split(" ");
+            int lay = Integer.parseInt(data[2]) % Integer.parseInt(data[0]);
+            int cow = Integer.parseInt(data[2]) / Integer.parseInt(data[0]);
+
+            if (lay == 0) lay = Integer.parseInt(data[0]);
+
+            answer.append(lay + String.format("%02d", (cow + 1)) + "\n");
+        }
+
+        System.out.println(answer.toString());
+    }
+
     private void SugarDeliv() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         int gram = Integer.parseInt(input.readLine());
@@ -80,7 +98,8 @@ public class BasicMath {
 //        basicMath.BreakEventPoint();
 //        basicMath.HoneyBeeHouse();
 //        basicMath.SnailUp();
-        basicMath.SugarDeliv();
+        basicMath.ACMHotel();
+//        basicMath.SugarDeliv();
 //        basicMath.BigIntPlus();
     }
 }
