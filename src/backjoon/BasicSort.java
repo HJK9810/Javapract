@@ -79,6 +79,45 @@ public class BasicSort {
         output.close();
     }
 
+    private void Cutline() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int cut = Integer.parseInt(line[1]);
+        String[] grades = input.readLine().split(" ");
+        int[] sort = new int[SIZE];
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < SIZE; i++) {
+            int num = Integer.parseInt(grades[i]);
+            sort[i] = num;
+            if (num > max) max = num;
+        }
+
+        // 카운팅정렬
+        int[] counting = new int[max + 1];
+        for (int i = 0; i < SIZE; i++) {
+            counting[sort[i]] += 1;
+        }
+
+        for (int i = 1; i < counting.length; i++) {
+            counting[i] += counting[i - 1];
+        }
+
+        int[] result = new int[SIZE];
+        for (int i = SIZE - 1; i >= 0; i--) {
+            int idx = sort[i];
+            counting[idx] -= 1;
+            result[counting[idx]] = idx;
+        }
+
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(result[cut - 1]);
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         BasicSort basicSort = new BasicSort();
 
