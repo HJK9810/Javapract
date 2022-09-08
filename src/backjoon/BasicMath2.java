@@ -57,6 +57,24 @@ public class BasicMath2 {
         else System.out.println(sum + "\n" + min);
     }
 
+    private void Factorization() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        int num = Integer.parseInt(input.readLine());
+
+        while (num != 1) {
+            for (int i = 2; i <= num; i++) {
+                if (num % i == 0) {
+                    output.write(i + "\n");
+                    num /= i;
+                    break;
+                }
+            }
+        }
+        output.flush();
+        output.close();
+    }
+
     private void Decimal3() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] line = input.readLine().split(" ");
@@ -126,7 +144,8 @@ public class BasicMath2 {
 
 //        basicMath2.Decimal(); // 소수 찾기
 //        basicMath2.Decimal2(); // 소수
+        basicMath2.Factorization(); // 소인수분해
 //        basicMath2.Decimal3(); // 소수 구하기
-        basicMath2.BertrandPostulate(); // 베르틀랑 공란
+//        basicMath2.BertrandPostulate(); // 베르틀랑 공란
     }
 }
