@@ -84,11 +84,49 @@ public class BasicMath2 {
         output.close();
     }
 
+    private static List<Boolean> primeList;
+
+    private static void CheckDecimal(int num) {
+        // 에라토스테네스의 체
+        if (num == 2) primeList.add(true);
+        for (int i = primeList.size(); i <= num; i++) primeList.add(i, true);
+
+        // 2부터  ~ i*i <= n  각각의 배수들을 지워가기
+        for (int i = 2; (i * i) <= num; i++) {
+            if (primeList.get(i)) {
+                for (int j = i * i; j <= num; j += i) primeList.set(j, false);
+            }
+        }
+    }
+
+    private void BertrandPostulate() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        primeList = new ArrayList<>();
+        primeList.add(false);
+        primeList.add(false);
+
+        int num;
+        while ((num = Integer.parseInt(input.readLine())) != 0) {
+            if (primeList.size() <= num * 2) CheckDecimal(num * 2);
+
+            int count = 0;
+            for (int i = num + 1; i <= num * 2; i++) {
+                if (primeList.get(i)) count++;
+            }
+            output.write(count + "\n");
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath2 basicMath2 = new BasicMath2();
 
 //        basicMath2.Decimal(); // 소수 찾기
 //        basicMath2.Decimal2(); // 소수
-        basicMath2.Decimal3(); // 소수 구하기
+//        basicMath2.Decimal3(); // 소수 구하기
+        basicMath2.BertrandPostulate(); // 베르틀랑 공란
     }
 }
