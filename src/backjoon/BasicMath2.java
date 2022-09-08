@@ -57,12 +57,38 @@ public class BasicMath2 {
         else System.out.println(sum + "\n" + min);
     }
 
+    private void Decimal3() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = input.readLine().split(" ");
+        int start = Integer.parseInt(line[0]);
+        int end = Integer.parseInt(line[1]);
+
+        // 에라토스테네스의 체
+        boolean[] primeList = new boolean[end + 1];
+        Arrays.fill(primeList, true);
+        primeList[0] = false;
+        primeList[1] = false;
+
+        // 2부터  ~ i*i <= n  각각의 배수들을 지워가기
+        for (int i = 2; (i * i) <= end; i++) {
+            if (primeList[i]) {
+                for (int j = i * i; j <= end; j += i) primeList[j] = false;
+            }
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int i = start; i <= end; i++) {
+            if (primeList[i]) output.write(i + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath2 basicMath2 = new BasicMath2();
 
-        // 소수 찾기
-//        basicMath2.Decimal();
-        // 소수
-        basicMath2.Decimal2();
+//        basicMath2.Decimal(); // 소수 찾기
+//        basicMath2.Decimal2(); // 소수
+        basicMath2.Decimal3(); // 소수 구하기
     }
 }
