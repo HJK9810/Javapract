@@ -139,13 +139,44 @@ public class BasicMath2 {
         output.close();
     }
 
+    private void GoldbachConjecture() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        final int SIZE = Integer.parseInt(input.readLine());
+        primeList = new ArrayList<>();
+        primeList.add(false);
+        primeList.add(false);
+
+        for (int i = 0; i < SIZE; i++) {
+            int num = Integer.parseInt(input.readLine());
+            int a = num / 2;
+            int b = num / 2;
+
+            if (primeList.size() <= num) CheckDecimal(num);
+
+            while (true) {
+                if (primeList.get(a) && primeList.get(b)) {
+                    output.write(a + " " + b + "\n");
+                    break;
+                } else {
+                    a--;
+                    b++;
+                }
+            }
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         BasicMath2 basicMath2 = new BasicMath2();
 
 //        basicMath2.Decimal(); // 소수 찾기
 //        basicMath2.Decimal2(); // 소수
-        basicMath2.Factorization(); // 소인수분해
+//        basicMath2.Factorization(); // 소인수분해
 //        basicMath2.Decimal3(); // 소수 구하기
 //        basicMath2.BertrandPostulate(); // 베르틀랑 공란
+        basicMath2.GoldbachConjecture(); // 골드바흐의 추측
     }
 }
