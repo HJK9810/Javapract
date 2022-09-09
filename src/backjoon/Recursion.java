@@ -16,9 +16,24 @@ public class Recursion {
         output.close();
     }
 
+    private static int Fibo(int n) {
+        if (n > 1) return Fibo(n - 1) + Fibo(n - 2);
+        else if (n == 1) return 1;
+        else return 0;
+    }
+
+    private void Fibonacci() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(Fibo(Integer.parseInt(input.readLine())) + "\n");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Recursion recursion = new Recursion();
 
-        recursion.Pactorial(); // 팩토리얼
+//        recursion.Pactorial(); // 팩토리얼
+        recursion.Fibonacci(); // 피보나치 수5
     }
 }
