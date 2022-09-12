@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Recursion {
+    // 팩토리얼
     private static int pact(int n) {
         if (n > 1) return n * pact(n - 1);
         else return 1;
@@ -17,6 +18,7 @@ public class Recursion {
         output.close();
     }
 
+    // 피보나치 수5
     private static int Fibo(int n) {
         if (n > 1) return Fibo(n - 1) + Fibo(n - 2);
         else if (n == 1) return 1;
@@ -31,6 +33,7 @@ public class Recursion {
         output.close();
     }
 
+    // 재귀가 뭐에요
     static String underbar = "";
 
     private static void strRE(int n) throws IOException {
@@ -60,6 +63,7 @@ public class Recursion {
         strRE(num);
     }
 
+    // 알고리즘 수업
     private static int[] merge_sort(int[] ary, int p, int r) {
         if (p < r) {
             int q = (p + r) / 2;
