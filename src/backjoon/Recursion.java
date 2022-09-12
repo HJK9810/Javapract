@@ -64,46 +64,57 @@ public class Recursion {
     }
 
     // 알고리즘 수업
-    private static int[] merge_sort(int[] ary, int p, int r) {
-        if (p < r) {
-            int q = (p + r) / 2;
-            merge_sort(ary, p, q);
-            merge_sort(ary, q + 1, r);
-            merge(ary, p, q, r);
-        }
+    private static int[] temp;
+    private static int count;
+    private static int result;
 
-        return ary;
+    private static void merge_sort(int[] ary, int p, int r, int forC) {
+        if (p == r) return;
+        if (count == forC) return;
+
+        int q = (p + r) / 2;
+        merge_sort(ary, p, q, forC);
+        merge_sort(ary, q + 1, r, forC);
+        merge(ary, p, q, r, forC);
     }
 
-    private static int[] merge(int[] ary, int p, int q, int r) {
+    private static void merge(int[] ary, int p, int q, int r, int forC) {
         int i = p;
         int j = q + 1;
         int t = 1;
-        int[] temp = new int[ary.length];
 
-        while (i < q && j < r) {
+        while (i <= q && j <= r) {
             if (ary[i] <= ary[j]) {
-                temp[t++] = ary[i++];
                 temp[t] = ary[i];
                 t++;
                 i++;
             } else {
-                temp[t++] = ary[j++];
                 temp[t] = ary[j];
                 t++;
                 j++;
             }
         }
 
-        while (i < q) temp[t++] = ary[i++];
+        if (i > q) {
+            while (i <= q) {
+                temp[t] = ary[i];
+                t++;
+                i++;
+            }
+        } else {
+            while (j <= r) {
+                temp[t] = ary[j];
+                t++;
+                j++;
+            }
+        }
 
-        while (j < r) temp[t++] = ary[j++];
-
-        i = p;
-        t = 1;
-        while (i < r) ary[i++] = temp[t++];
-
-        return ary;
+        for (int idx = p; idx < r; idx++) {
+            ary[idx] = temp[idx];
+            result = temp[idx];
+            count++;
+            if (count == forC) break;
+        }
     }
 
     private void AlgorismClass() throws IOException {
@@ -114,13 +125,15 @@ public class Recursion {
 
         String[] ary = input.readLine().split(" ");
         int[] numbers = new int[SIZE];
-
         for (int i = 0; i < SIZE; i++) {
             numbers[i] = Integer.parseInt(ary[i]);
         }
 
-        merge_sort(numbers, 0, SIZE - 1);
-        System.out.println(Arrays.toString(numbers));
+        temp = new int[SIZE];
+        count = 0;
+        merge_sort(numbers, 0, SIZE - 1, forCount);
+        if (count == forCount) System.out.println(result);
+        else System.out.println(-1);
     }
 
     public static void main(String[] args) throws IOException {
