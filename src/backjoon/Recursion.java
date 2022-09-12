@@ -1,6 +1,7 @@
 package backjoon;
 
 import java.io.*;
+import java.util.*;
 
 public class Recursion {
     private static int pact(int n) {
@@ -59,11 +60,71 @@ public class Recursion {
         strRE(num);
     }
 
+    private static int[] merge_sort(int[] ary, int p, int r) {
+        if (p < r) {
+            int q = (p + r) / 2;
+            merge_sort(ary, p, q);
+            merge_sort(ary, q + 1, r);
+            merge(ary, p, q, r);
+        }
+
+        return ary;
+    }
+
+    private static int[] merge(int[] ary, int p, int q, int r) {
+        int i = p;
+        int j = q + 1;
+        int t = 1;
+        int[] temp = new int[ary.length];
+
+        while (i < q && j < r) {
+            if (ary[i] <= ary[j]) {
+                temp[t++] = ary[i++];
+                temp[t] = ary[i];
+                t++;
+                i++;
+            } else {
+                temp[t++] = ary[j++];
+                temp[t] = ary[j];
+                t++;
+                j++;
+            }
+        }
+
+        while (i < q) temp[t++] = ary[i++];
+
+        while (j < r) temp[t++] = ary[j++];
+
+        i = p;
+        t = 1;
+        while (i < r) ary[i++] = temp[t++];
+
+        return ary;
+    }
+
+    private void AlgorismClass() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int forCount = Integer.parseInt(line[1]);
+
+        String[] ary = input.readLine().split(" ");
+        int[] numbers = new int[SIZE];
+
+        for (int i = 0; i < SIZE; i++) {
+            numbers[i] = Integer.parseInt(ary[i]);
+        }
+
+        merge_sort(numbers, 0, SIZE - 1);
+        System.out.println(Arrays.toString(numbers));
+    }
+
     public static void main(String[] args) throws IOException {
         Recursion recursion = new Recursion();
 
 //        recursion.Pactorial(); // 팩토리얼
 //        recursion.Fibonacci(); // 피보나치 수5
-        recursion.Recurs();
+//        recursion.Recurs();
+        recursion.AlgorismClass(); // 알고리즘 수업
     }
 }
