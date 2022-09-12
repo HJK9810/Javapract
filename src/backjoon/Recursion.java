@@ -63,6 +63,34 @@ public class Recursion {
         strRE(num);
     }
 
+    // 재귀의 귀재
+    private static int countRecur;
+
+    private static int recursion(String s, int l, int r) {
+        countRecur++;
+        if (l >= r) return 1;
+        else if (s.charAt(l) != s.charAt(r)) return 0;
+        else return recursion(s, l + 1, r - 1);
+    }
+
+    private static int isPalindrome(String s) {
+        return recursion(s, 0, s.length() - 1);
+    }
+
+    private void RecurRecur() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        for (int i = 0; i < SIZE; i++) {
+            countRecur = 0;
+            int result = isPalindrome(input.readLine());
+            output.write(result + " " + countRecur + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     // 알고리즘 수업
     private static int[] temp;
     private static int count;
@@ -142,6 +170,7 @@ public class Recursion {
 //        recursion.Pactorial(); // 팩토리얼
 //        recursion.Fibonacci(); // 피보나치 수5
 //        recursion.Recurs();
-        recursion.AlgorismClass(); // 알고리즘 수업
+        recursion.RecurRecur(); // 재귀의 귀재
+//        recursion.AlgorismClass(); // 알고리즘 수업
     }
 }
