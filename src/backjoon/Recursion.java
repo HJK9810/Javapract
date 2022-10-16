@@ -164,13 +164,42 @@ public class Recursion {
         else System.out.println(-1);
     }
 
+    static StringBuffer sb = new StringBuffer();
+
+    private void stars(int x, int y, int num) {
+        if ((x / num) % 3 == 1 && (y / num) % 3 == 1) {
+            sb.append(" ");
+        } else {
+            if (num / 3 == 0) sb.append("*");
+            else stars(x, y, num / 3);
+        }
+    }
+
+    private void DrawStart() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                stars(i, j, SIZE);
+            }
+            sb.append("\n");
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(sb.toString());
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Recursion recursion = new Recursion();
 
 //        recursion.Pactorial(); // 팩토리얼
 //        recursion.Fibonacci(); // 피보나치 수5
 //        recursion.Recurs();
-        recursion.RecurRecur(); // 재귀의 귀재
+//        recursion.RecurRecur(); // 재귀의 귀재
 //        recursion.AlgorismClass(); // 알고리즘 수업
+        recursion.DrawStart();
     }
 }
