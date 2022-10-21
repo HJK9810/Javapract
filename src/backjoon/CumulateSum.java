@@ -50,10 +50,32 @@ public class CumulateSum {
         output.close();
     }
 
+    private void Interaction() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        final String str = input.readLine();
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        for (int i = 0; i < SIZE; i++) {
+            String[] line = input.readLine().split(" ");
+            String alph = line[0];
+            int start = Integer.parseInt(line[1]);
+            int end = Integer.parseInt(line[2]);
+            String basic = str.length() - 1 == end ? str.substring(start) : str.substring(start, end + 1);
+
+            String minus = basic.replaceAll(alph, "");
+            output.write(end - start + 1 - minus.length() + "\n");
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         CumulateSum cumulateSum = new CumulateSum();
 
 //        cumulateSum.SectionSum(); // 구간합 구하기4
-        cumulateSum.Sequence(); // 수열
+//        cumulateSum.Sequence(); // 수열
+        cumulateSum.Interaction(); // 인간-컴퓨터 상호작용
     }
 }
