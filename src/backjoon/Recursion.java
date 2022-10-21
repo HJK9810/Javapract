@@ -192,6 +192,33 @@ public class Recursion {
         output.close();
     }
 
+    static StringBuffer root = new StringBuffer();
+
+    private void move(int start, int end) {
+        root.append(start + " " + end + "\n");
+    }
+
+    private void honoi(int num, int start, int end, int via) {
+        if (num == 1) move(start, end);
+        else {
+            honoi(num - 1, start, via, end);
+            move(start, end);
+            honoi(num - 1, via, end, start);
+        }
+    }
+
+    private void HonoiTower() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        int count = (int) Math.pow(2, SIZE) - 1;
+        honoi(SIZE, 1, 3, 2);
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(count + "\n" + root.toString());
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Recursion recursion = new Recursion();
 
@@ -200,6 +227,7 @@ public class Recursion {
 //        recursion.Recurs();
 //        recursion.RecurRecur(); // 재귀의 귀재
 //        recursion.AlgorismClass(); // 알고리즘 수업
-        recursion.DrawStart();
+//        recursion.DrawStart(); // 별찍기-10
+        recursion.HonoiTower(); // 하노이의탑
     }
 }
