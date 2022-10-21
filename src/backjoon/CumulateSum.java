@@ -97,12 +97,46 @@ public class CumulateSum {
         output.close();
     }
 
+    private void SectionSum5() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        String[] leng = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(leng[0]);
+        final int count = Integer.parseInt(leng[1]);
+
+        int[][] nums = new int[SIZE][SIZE + 1];
+        for (int i = 0; i < SIZE; i++) {
+            String[] line = input.readLine().split(" ");
+            nums[i][0] = 0;
+            for (int j = 0; j < SIZE; j++) {
+                nums[i][j + 1] = nums[i][j] + Integer.parseInt(line[j]);
+            }
+        }
+
+        for (int i = 0; i < count; i++) {
+            String[] position = input.readLine().split(" ");
+            int x1 = Integer.parseInt(position[0]);
+            int y1 = Integer.parseInt(position[1]);
+            int x2 = Integer.parseInt(position[2]);
+            int y2 = Integer.parseInt(position[3]);
+
+            int sum = 0;
+            for (int row = y1 - 1; row < y2; row++) {
+                sum += (nums[row][x2] - nums[row][x1 - 1]);
+            }
+            output.write(sum + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         CumulateSum cumulateSum = new CumulateSum();
 
 //        cumulateSum.SectionSum(); // 구간합 구하기4
 //        cumulateSum.Sequence(); // 수열
 //        cumulateSum.Interaction(); // 인간-컴퓨터 상호작용
-        cumulateSum.Reaminder(); // 나머지의 합
+//        cumulateSum.Reaminder(); // 나머지의 합
+        cumulateSum.SectionSum5(); // 구간합 구하기5
     }
 }
