@@ -71,11 +71,38 @@ public class CumulateSum {
         output.close();
     }
 
+    private void Reaminder() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] leng = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(leng[0]);
+        final int value = Integer.parseInt(leng[1]);
+        String[] numbers = input.readLine().split(" ");
+
+        int[] nums = new int[SIZE + 1];
+
+        nums[0] = 0;
+        for (int i = 0; i < SIZE; i++) {
+            nums[i + 1] = (nums[i] + Integer.parseInt(numbers[i])) % value;
+        }
+
+        int count = 0;
+        for (int i = SIZE; i > 0; i--) {
+            for (int j = 1; j < i; j++) {
+                if ((nums[i] - nums[j - 1]) % value == 0) count++;
+            }
+        }
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(count + "\n");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         CumulateSum cumulateSum = new CumulateSum();
 
 //        cumulateSum.SectionSum(); // 구간합 구하기4
 //        cumulateSum.Sequence(); // 수열
-        cumulateSum.Interaction(); // 인간-컴퓨터 상호작용
+//        cumulateSum.Interaction(); // 인간-컴퓨터 상호작용
+        cumulateSum.Reaminder(); // 나머지의 합
     }
 }
