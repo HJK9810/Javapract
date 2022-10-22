@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.*;
+import java.util.zip.CheckedOutputStream;
 
 public class BasicSort {
     private void Sorting() throws IOException {
@@ -118,12 +119,53 @@ public class BasicSort {
         output.close();
     }
 
+    private void statistics() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        int[] nums = new int[SIZE];
+
+        for (int i = 0; i < SIZE; i++) {
+            nums[i] = Integer.parseInt(input.readLine());
+        }
+
+        Arrays.sort(nums);
+        int mid = nums[SIZE / 2];
+
+        HashMap<Integer, Integer> counts = new HashMap<>();
+        int sum = 0;
+        for (int i = 0; i < SIZE; i++) {
+            sum += nums[i];
+            if (!counts.containsKey(nums[i])) counts.put(nums[i], 1);
+            else counts.put(nums[i], counts.get(nums[i]) + 1);
+        }
+        int aver = (int) (((double) sum / SIZE) * 10) / 10;
+        int max = Integer.MIN_VALUE;
+        for (int num : counts.keySet()) {
+            if (max < counts.get(num)) max = counts.get(num);
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int num : counts.keySet()) {
+            if (counts.get(num) == max) {
+                list.add(num);
+            }
+        }
+        Collections.sort(list);
+        int count = 0;
+        if (list.size() == 1) count = list.get(0);
+        else count = list.get(1);
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(aver + "\n" + mid + "\n" + count + "\n" + (nums[SIZE - 1] - nums[0]));
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         BasicSort basicSort = new BasicSort();
 
-        // 수 정렬하기
-        basicSort.Sorting();
-        // 수 정렬하기3 - 카운팅정렬
-        basicSort.Sorting3();
+//        basicSort.Sorting(); // 수 정렬하기
+//        basicSort.Sorting3(); // 수 정렬하기3 - 카운팅정렬
+//        basicSort.Cutline(); // 커트라인
+        basicSort.statistics(); // 통계학
     }
 }
