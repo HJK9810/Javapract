@@ -2,7 +2,6 @@ package backjoon;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -207,6 +206,35 @@ public class BasicArray {
         output.close();
     }
 
+    private static void ChangeBall() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] nums = input.readLine().split(" ");
+        final int BOX_SIZE = Integer.parseInt(nums[0]);
+        final int SIZE = Integer.parseInt(nums[1]);
+        int[] boxes = new int[BOX_SIZE];
+
+        for (int count = 0; count < BOX_SIZE; count++) {
+            boxes[count] = count + 1;
+        }
+
+        for (int index = 0; index < SIZE; index++) {
+            String[] values = input.readLine().split(" ");
+            int first = Integer.parseInt(values[0]) - 1;
+            int second = Integer.parseInt(values[1]) - 1;
+
+            int changed = boxes[first];
+            boxes[first] = boxes[second];
+            boxes[second] = changed;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int box: boxes) {
+            output.write(box + " ");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
@@ -216,6 +244,7 @@ public class BasicArray {
 //        QuizAns();
 //        RestVal();
 //        FindNums();
-        InputBall();
+//        InputBall();
+        ChangeBall();
     }
 }
