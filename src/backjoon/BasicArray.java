@@ -180,6 +180,33 @@ public class BasicArray {
         output.close();
     }
 
+    private static void InputBall() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] nums = input.readLine().split(" ");
+        final int BOX_SIZE = Integer.parseInt(nums[0]);
+        final int COUNTS = Integer.parseInt(nums[1]);
+
+        int[] boxes = new int[BOX_SIZE];
+
+        for (int count = 0; count < COUNTS; count++) {
+            String[] values = input.readLine().split(" ");
+            int start = Integer.parseInt(values[0]) - 1;
+            int end = Integer.parseInt(values[1]);
+            int box = Integer.parseInt(values[2]);
+
+            for (int idx = start; idx < end; idx++) {
+                boxes[idx] = box;
+            }
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        for (int box: boxes) {
+            output.write(box + " ");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
@@ -188,6 +215,7 @@ public class BasicArray {
 //        OverAverg();
 //        QuizAns();
 //        RestVal();
-        FindNums();
+//        FindNums();
+        InputBall();
     }
 }
