@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class BasicArray {
     public static void MinAndMax() throws IOException {
@@ -160,13 +161,33 @@ public class BasicArray {
         output.close();
     }
 
+    private static void FindNums() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+        String[] nums = input.readLine().split(" ");
+        final String FIND = input.readLine();
+        int count = 0;
+
+        for (int i = 0; i < SIZE; i++) {
+            if (Objects.equals(FIND, nums[i])) {
+                count++;
+            }
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+        output.write(count + "");
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
 //        CountNums();
-        Averg();
+//        Averg();
 //        OverAverg();
 //        QuizAns();
 //        RestVal();
+        FindNums();
     }
 }
