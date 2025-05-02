@@ -235,6 +235,24 @@ public class BasicArray {
         output.close();
     }
 
+    private static void CheckPract() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        Boolean[] members = new Boolean[30];
+
+        for (int idx = 0; idx < 28; idx++) {
+            int num = Integer.parseInt(input.readLine()) - 1;
+            members[num] = true;
+        }
+
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        for (int idx = 0; idx < members.length; idx++) {
+            if (members[idx] == null) output.write(idx + 1 + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
 //        MinAndMax();
 //        Max();
@@ -245,6 +263,7 @@ public class BasicArray {
 //        RestVal();
 //        FindNums();
 //        InputBall();
-        ChangeBall();
+//        ChangeBall();
+        CheckPract();
     }
 }
