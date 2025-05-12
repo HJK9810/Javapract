@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Fourth {
+public class Third {
     private void changedOne() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
@@ -110,10 +110,10 @@ public class Fourth {
     }
 
     public static void main(String[] args) throws IOException {
-        Fourth fourth = new Fourth();
+        Third third = new Third();
 
 //        fourth.changedOne();
 //        fourth.fibonacciFuc();
-        fourth.ATM();
+        third.ATM();
     }
 }
