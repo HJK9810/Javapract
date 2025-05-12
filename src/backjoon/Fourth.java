@@ -62,9 +62,39 @@ public class Fourth {
         output.close();
     }
 
+    private void fibonacciFuc() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int SIZE = Integer.parseInt(input.readLine());
+
+        for (int i = 0; i < SIZE; i++) {
+            int number = Integer.parseInt(input.readLine());
+
+            if (number < 2) {
+                output.write(number == 0 ? "1 0\n" : "0 1\n");
+                continue;
+            }
+
+            int[][] fibonacci = new int[number + 1][2];
+
+            fibonacci[0] = new int[]{1, 0};
+            fibonacci[1] = new int[]{0, 1};
+            for (int num = 2; num <= number; num++) {
+                fibonacci[num] = new int[]{
+                        fibonacci[num - 1][0] + fibonacci[num - 2][0], fibonacci[num - 1][1] + fibonacci[num - 2][1]
+                };
+            }
+            output.write(String.format("%d %d\n", fibonacci[number][0], fibonacci[number][1]));
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
 //        fourth.changedOne();
+        fourth.fibonacciFuc();
     }
 }
