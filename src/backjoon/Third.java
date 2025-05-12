@@ -112,8 +112,8 @@ public class Third {
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
-//        fourth.changedOne();
-//        fourth.fibonacciFuc();
+//        third.changedOne();
+//        third.fibonacciFuc();
         third.ATM();
     }
 }
