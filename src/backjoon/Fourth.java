@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -91,10 +92,28 @@ public class Fourth {
         output.close();
     }
 
+    private void ATM() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        int SIZE = Integer.parseInt(input.readLine());
+        String[] nums = input.readLine().split(" ");
+        Arrays.sort(nums, Comparator.comparingInt(Integer::parseInt));
+        int sum = 0;
+        int forAdd = 0;
+
+        for (int idx = 0; idx < SIZE; idx++) {
+            sum += (forAdd + Integer.parseInt(nums[idx]));
+            forAdd += Integer.parseInt(nums[idx]);
+        }
+
+        System.out.println(sum);
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
 //        fourth.changedOne();
-        fourth.fibonacciFuc();
+//        fourth.fibonacciFuc();
+        fourth.ATM();
     }
 }
