@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Third {
     private void changedOne() throws IOException {
@@ -109,11 +110,54 @@ public class Third {
         System.out.println(sum);
     }
 
+    private void ACStringRule() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int SIZE = Integer.parseInt(input.readLine());
+
+        for (int i = 0; i < SIZE; i++) {
+            String[] orders = input.readLine().split("");
+            int numSize = Integer.parseInt(input.readLine());
+            String[] strAry = input.readLine().replaceAll("[\\[\\]\\s]", "").split(",");
+            Queue<Integer> queue = new LinkedList<>();
+            boolean isStop = false;
+
+            for (int idx = 0; idx < numSize; idx++) {
+                queue.add(Integer.parseInt(strAry[idx]));
+            }
+
+            for (String order : orders) {
+                if (order.equals("R")) {
+                    Stack<Integer> stack = new Stack<>();
+                    while (!queue.isEmpty()) {
+                        stack.push(queue.poll());
+                    }
+                    while (!stack.isEmpty()) {
+                        queue.add(stack.pop());
+                    }
+                } else if (order.equals("D")) {
+                    if (queue.poll() == null) {
+                        output.write("error\n");
+                        isStop = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isStop) continue;
+            output.write(queue.toString().replaceAll(" ", "") + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
 //        third.changedOne();
 //        third.fibonacciFuc();
-        third.ATM();
+//        third.ATM();
+        third.ACStringRule();
     }
 }
