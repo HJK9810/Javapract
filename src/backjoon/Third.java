@@ -216,6 +216,30 @@ public class Third {
         output.close();
     }
 
+    private void CheckCoins() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] firstLine = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(firstLine[0]);
+        int amount = Integer.parseInt(firstLine[1]);
+        int[] coinBox = new int[SIZE];
+        int sum = 0;
+
+        for (int i = SIZE - 1; i >= 0; i--) {
+            coinBox[i] = Integer.parseInt(input.readLine());
+        }
+
+        for (int coin : coinBox) {
+            if (coin > amount) continue;
+
+            int val = amount / coin;
+            sum += val;
+            amount -= val * coin;
+        }
+
+        System.out.println(sum);
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -224,6 +248,7 @@ public class Third {
 //        third.ATM();
 //        third.ACStringRule();
 //        third.NotSeemAndHeard();
-        third.CheckPasswd();
+//        third.CheckPasswd();
+        third.CheckCoins();
     }
 }
