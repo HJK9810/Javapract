@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -196,6 +197,25 @@ public class Third {
         output.close();
     }
 
+    private void CheckPasswd() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] size = input.readLine().split(" ");
+        HashMap<String, String> passwdMap = new HashMap<>();
+
+        for (int i = 0; i < Integer.parseInt(size[0]); i++) {
+            String[] inputValue = input.readLine().split(" ");
+            passwdMap.put(inputValue[0], inputValue[1]);
+        }
+
+        for (int i = 0; i < Integer.parseInt(size[1]); i++) {
+            output.write(passwdMap.get(input.readLine()) + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -203,6 +223,7 @@ public class Third {
 //        third.fibonacciFuc();
 //        third.ATM();
 //        third.ACStringRule();
-        third.NotSeemAndHeard();
+//        third.NotSeemAndHeard();
+        third.CheckPasswd();
     }
 }
