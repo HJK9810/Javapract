@@ -4,10 +4,14 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 public class Third {
     private void changedOne() throws IOException {
@@ -168,23 +172,26 @@ public class Third {
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
 
         String[] size = input.readLine().split(" ");
-        ArrayList<String> nameList = new ArrayList<>();
-        int count = 0;
+        Set<String> nameSet = new HashSet<>();
+        List<String> result = new ArrayList<>();
 
         for (int i = 0; i < Integer.parseInt(size[0]); i++) {
-            nameList.add(input.readLine());
+            nameSet.add(input.readLine());
         }
 
         for (int i = 0; i < Integer.parseInt(size[1]); i++) {
             String name = input.readLine();
-            if (nameList.contains(name)) {
-                output.write(name + "\n");
-                count++;
+            if (nameSet.contains(name)) {
+                result.add(name);
             }
         }
 
+        Collections.sort(result);
+        output.write(result.size() + "\n");
+        for (String name : result) {
+            output.write(name + "\n");
+        }
 
-        System.out.println(count);
         output.flush();
         output.close();
     }
