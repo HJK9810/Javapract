@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.*;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Deque;
@@ -162,12 +163,39 @@ public class Third {
         output.close();
     }
 
+    private void NotSeemAndHeard() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] size = input.readLine().split(" ");
+        ArrayList<String> nameList = new ArrayList<>();
+        int count = 0;
+
+        for (int i = 0; i < Integer.parseInt(size[0]); i++) {
+            nameList.add(input.readLine());
+        }
+
+        for (int i = 0; i < Integer.parseInt(size[1]); i++) {
+            String name = input.readLine();
+            if (nameList.contains(name)) {
+                output.write(name + "\n");
+                count++;
+            }
+        }
+
+
+        System.out.println(count);
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
 //        third.changedOne();
 //        third.fibonacciFuc();
 //        third.ATM();
-        third.ACStringRule();
+//        third.ACStringRule();
+        third.NotSeemAndHeard();
     }
 }
