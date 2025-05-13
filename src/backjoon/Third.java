@@ -1,11 +1,12 @@
 package backjoon;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class Third {
     private void changedOne() throws IOException {
@@ -120,33 +121,42 @@ public class Third {
             String[] orders = input.readLine().split("");
             int numSize = Integer.parseInt(input.readLine());
             String[] strAry = input.readLine().replaceAll("[\\[\\]\\s]", "").split(",");
-            Queue<Integer> queue = new LinkedList<>();
+            Deque<Integer> deque = new ArrayDeque<>();
             boolean isStop = false;
+            boolean isFrontFlag = true;
 
-            for (int idx = 0; idx < numSize; idx++) {
-                queue.add(Integer.parseInt(strAry[idx]));
+            if (!(numSize == 0 || (strAry.length == 1 && strAry[0].isBlank()))) {
+                for (int idx = 0; idx < numSize; idx++) {
+                    deque.add(Integer.parseInt(strAry[idx]));
+                }
             }
 
             for (String order : orders) {
                 if (order.equals("R")) {
-                    Stack<Integer> stack = new Stack<>();
-                    while (!queue.isEmpty()) {
-                        stack.push(queue.poll());
-                    }
-                    while (!stack.isEmpty()) {
-                        queue.add(stack.pop());
-                    }
+                    isFrontFlag = !isFrontFlag;
                 } else if (order.equals("D")) {
-                    if (queue.poll() == null) {
+                    if (deque.isEmpty()) {
                         output.write("error\n");
                         isStop = true;
                         break;
+                    } else {
+                        if (isFrontFlag) deque.removeFirst();
+                        else deque.removeLast();
                     }
                 }
             }
 
             if (isStop) continue;
-            output.write(queue.toString().replaceAll(" ", "") + "\n");
+            if (deque.isEmpty()) {
+                output.write("[]\n");
+                continue;
+            }
+
+            output.write("[");
+            while (deque.size() > 1) {
+                output.write((isFrontFlag ? deque.pollFirst() : deque.pollLast()) + ",");
+            }
+            output.write(deque.getFirst() + "]\n");
         }
         output.flush();
         output.close();
