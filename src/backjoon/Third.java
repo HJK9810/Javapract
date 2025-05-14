@@ -240,6 +240,32 @@ public class Third {
         System.out.println(sum);
     }
 
+    private void CheckIOIStr() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuffer sb = new StringBuffer();
+
+        final int SIZE = Integer.parseInt(input.readLine());
+        int lastIdx = Integer.parseInt(input.readLine()) - (SIZE * 2 + 1);
+        String sampleLine = input.readLine();
+        int count = 0;
+
+        for (int idx = 0; idx < SIZE * 2 + 1; idx++) {
+            sb.append(idx % 2 == 0 ? "I" : "O");
+        }
+
+        String baseLine = sb.toString();
+        int index = 0;
+
+        while (index < lastIdx) {
+            int findIdx = sampleLine.indexOf(baseLine, index + 1);
+            if (findIdx > -1) {
+                index = findIdx;
+                count++;
+            } else break;
+        }
+        System.out.println(count);
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -249,6 +275,7 @@ public class Third {
 //        third.ACStringRule();
 //        third.NotSeemAndHeard();
 //        third.CheckPasswd();
-        third.CheckCoins();
+//        third.CheckCoins();
+        third.CheckIOIStr();
     }
 }
