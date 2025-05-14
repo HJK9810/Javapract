@@ -8,6 +8,7 @@ java_basic_review
 - Second : solved.ac 기준 class2 문제
 - Third : solved.ac 기준 class3 문제
 - Fourth : solved.ac 기준 class4 문제
+- Fifth : solved.ac 기준 class5 문제
 
 ### base :  
 기본 연습문제
