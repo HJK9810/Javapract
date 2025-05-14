@@ -242,26 +242,27 @@ public class Third {
 
     private void CheckIOIStr() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        StringBuffer sb = new StringBuffer();
 
         final int SIZE = Integer.parseInt(input.readLine());
-        int lastIdx = Integer.parseInt(input.readLine()) - (SIZE * 2 + 1);
-        String sampleLine = input.readLine();
+        int listSize = Integer.parseInt(input.readLine());
+        char[] line = input.readLine().toCharArray();
+
+        int pattern = 0;
         int count = 0;
+        int idx = 1;
 
-        for (int idx = 0; idx < SIZE * 2 + 1; idx++) {
-            sb.append(idx % 2 == 0 ? "I" : "O");
-        }
-
-        String baseLine = sb.toString();
-        int index = 0;
-
-        while (index < lastIdx) {
-            int findIdx = sampleLine.indexOf(baseLine, index + 1);
-            if (findIdx > -1) {
-                index = findIdx;
-                count++;
-            } else break;
+        while (idx < listSize - 1) {
+            if (line[idx - 1] == 'I' && line[idx] == 'O' && line[idx + 1] == 'I') {
+                pattern++;
+                if (pattern == SIZE) {
+                    count++;
+                    pattern--;
+                }
+                idx += 2;
+            } else {
+                idx++;
+                pattern = 0;
+            }
         }
         System.out.println(count);
     }
