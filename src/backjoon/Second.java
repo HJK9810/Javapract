@@ -55,9 +55,26 @@ public class Second {
         output.close();
     }
 
+    private void TilingN() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        int number = Integer.parseInt(input.readLine());
+        int[] dp = new int[number + 2];
+
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for (int idx = 2; idx <= number; idx++) {
+            dp[idx] = (dp[idx - 1] + dp[idx - 2]) % 10007;
+        }
+
+        System.out.println(dp[number]);
+    }
+
     public static void main(String[] args) throws IOException {
         Second second = new Second();
 
-        second.PrintQeue();
+//        second.PrintQeue();
+        second.TilingN();
     }
 }
