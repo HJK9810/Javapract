@@ -289,6 +289,23 @@ public class Third {
         output.close();
     }
 
+    private void MinHeap() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        final int SIZE = Integer.parseInt(input.readLine());
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+        for (int i = 0; i < SIZE; i++) {
+            int num = Integer.parseInt(input.readLine());
+            if (num == 0) {
+                output.write((heap.isEmpty() ? 0 : heap.poll()) + "\n");
+            } else heap.add(num);
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -300,6 +317,7 @@ public class Third {
 //        third.CheckPasswd();
 //        third.CheckCoins();
 //        third.CheckIOIStr();
-        third.AbsHeap();
+//        third.AbsHeap();
+        third.MinHeap();
     }
 }
