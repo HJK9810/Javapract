@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -267,6 +268,27 @@ public class Third {
         System.out.println(count);
     }
 
+    private void AbsHeap() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        final int SIZE = Integer.parseInt(input.readLine());
+        PriorityQueue<Integer> heap = new PriorityQueue<>((o1, o2) -> {
+            if (Math.abs(o1) != Math.abs(o2)) return Math.abs(o1) > Math.abs(o2) ? 1 : -1;
+            else return o1 > o2 ? 1 : -1;
+        });
+
+        for (int count = 0; count < SIZE; count++) {
+            int num = Integer.parseInt(input.readLine());
+            if (num == 0) {
+                output.write((heap.isEmpty() ? 0 : heap.poll()) + "\n");
+            } else heap.add(num);
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -277,6 +299,7 @@ public class Third {
 //        third.NotSeemAndHeard();
 //        third.CheckPasswd();
 //        third.CheckCoins();
-        third.CheckIOIStr();
+//        third.CheckIOIStr();
+        third.AbsHeap();
     }
 }
