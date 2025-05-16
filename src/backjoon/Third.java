@@ -323,6 +323,22 @@ public class Third {
         output.close();
     }
 
+    private void TilingN2() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        int number = Integer.parseInt(input.readLine());
+        int[] dp = new int[number + 2];
+
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for (int idx = 2; idx <= number; idx++) {
+            dp[idx] = (dp[idx - 1] + dp[idx - 2] * 2) % 10007;
+        }
+
+        System.out.println(dp[number]);
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -335,6 +351,7 @@ public class Third {
 //        third.CheckCoins();
 //        third.CheckIOIStr();
 //        third.AbsHeap();
-        third.MinHeap();
+//        third.MinHeap();
+        third.TilingN2();
     }
 }
