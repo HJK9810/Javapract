@@ -3,8 +3,6 @@ package backjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class Fourth {
     private void fixAtoB() throws IOException {
@@ -45,37 +43,22 @@ public class Fourth {
         final int SIZE = Integer.parseInt(inputvalue[0]);
         final int amount = Integer.parseInt(inputvalue[1]);
 
-        int maxValue = Integer.MIN_VALUE;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int[] keys = new int[SIZE];
+        int[] weight = new int[SIZE];
+        int[] values = new int[SIZE];
+        int[] dp = new int[amount + 1];
 
         for (int i = 0; i < SIZE; i++) {
-            String[] value = input.readLine().split(" ");
-            map.put(Integer.parseInt(value[0]), Integer.parseInt(value[1]));
-            keys[i] = Integer.parseInt(value[0]);
+            String[] temp = input.readLine().split(" ");
+            weight[i] = Integer.parseInt(temp[0]);
+            values[i] = Integer.parseInt(temp[1]);
         }
 
-        Arrays.sort(keys);
-        for (int idx = SIZE - 1; idx >= 0; idx--) {
-            int key = keys[idx];
-            int value = map.get(key);
-
-            if (amount < key) continue;
-
-            int need = amount - key;
-            if (need < keys[0]) {
-                maxValue = Math.max(maxValue, value);
-                continue;
+        for (int index = 0; index < SIZE; index++) {
+            for (int num = amount; num >= weight[index]; num--) {
+                dp[num] = Math.max(dp[num], dp[num - weight[index]] + values[index]);
             }
-
-            int index = 0;
-            while (index < SIZE && need >= keys[index]) {
-                index++;
-            }
-            maxValue = Math.max(maxValue, value + (index == 0 ? 0 : map.get(keys[index - 1])));
         }
-
-        System.out.println(maxValue);
+        System.out.println(dp[amount]);
     }
 
     public static void main(String[] args) throws IOException {
