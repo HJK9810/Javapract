@@ -80,21 +80,11 @@ public class Fourth {
         System.out.println(multiple % divider);
     }
 
-    private void TriangleBfs(int[][] triangle, int line, int idx, int sum, int[] sumList) throws IOException {
-        if (line == triangle.length) {
-            sumList[idx] = Math.max(sumList[idx], sum);
-            return;
-        }
-        TriangleBfs(triangle, line + 1, idx, sum + triangle[line][idx], sumList);
-        TriangleBfs(triangle, line + 1, idx + 1, sum + triangle[line][idx + 1], sumList);
-    }
-
     private void IntegerTriangle() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         int SIZE = Integer.parseInt(input.readLine());
         int[][] triangle = new int[SIZE][SIZE];
-        int[] maxSum = new int[SIZE];
 
         for (int i = 0; i < SIZE; i++) {
             String[] temp = input.readLine().split(" ");
@@ -103,9 +93,12 @@ public class Fourth {
             }
         }
 
-        TriangleBfs(triangle, 1, 0, triangle[0][0], maxSum);
-        Arrays.sort(maxSum);
-        System.out.println(maxSum[SIZE - 1]);
+        for (int num = SIZE - 2; num >= 0; num--) {
+            for (int index = 0; index <= num; index++) {
+                triangle[num][index] += Math.max(triangle[num + 1][index], triangle[num + 1][index + 1]);
+            }
+        }
+        System.out.println(triangle[0][0]);
     }
 
     public static void main(String[] args) throws IOException {
