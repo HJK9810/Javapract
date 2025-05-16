@@ -64,15 +64,17 @@ public class Fourth {
     private void MutlipleAndDeciminal() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String[] inputvalue = input.readLine().split(" ");
-        int base = Integer.parseInt(inputvalue[0]);
-        int pow = Integer.parseInt(inputvalue[1]);
-        int divider = Integer.parseInt(inputvalue[2]);
+        long base = Integer.parseInt(inputvalue[0]);
+        long pow = Integer.parseInt(inputvalue[1]);
+        long divider = Integer.parseInt(inputvalue[2]);
 
-        int multiple = base % divider;
+        long multiple = 1;
+        base %= divider;
 
-        for (int num = 0; num < pow; num++) {
-            multiple *= base;
-            multiple %= divider;
+        while (pow > 0) {
+            if (pow % 2 == 1) multiple = (base * multiple) % divider;
+            base = (base * base) % divider;
+            pow /= 2;
         }
         System.out.println(multiple % divider);
     }
