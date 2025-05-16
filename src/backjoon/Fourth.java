@@ -3,6 +3,7 @@ package backjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Fourth {
     private void fixAtoB() throws IOException {
@@ -79,11 +80,40 @@ public class Fourth {
         System.out.println(multiple % divider);
     }
 
+    private void TriangleBfs(int[][] triangle, int line, int idx, int sum, int[] sumList) throws IOException {
+        if (line == triangle.length) {
+            sumList[idx] = Math.max(sumList[idx], sum);
+            return;
+        }
+        TriangleBfs(triangle, line + 1, idx, sum + triangle[line][idx], sumList);
+        TriangleBfs(triangle, line + 1, idx + 1, sum + triangle[line][idx + 1], sumList);
+    }
+
+    private void IntegerTriangle() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        int SIZE = Integer.parseInt(input.readLine());
+        int[][] triangle = new int[SIZE][SIZE];
+        int[] maxSum = new int[SIZE];
+
+        for (int i = 0; i < SIZE; i++) {
+            String[] temp = input.readLine().split(" ");
+            for (int idx = 0; idx < temp.length; idx++) {
+                triangle[i][idx] = Integer.parseInt(temp[idx]);
+            }
+        }
+
+        TriangleBfs(triangle, 1, 0, triangle[0][0], maxSum);
+        Arrays.sort(maxSum);
+        System.out.println(maxSum[SIZE - 1]);
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
 //        fourth.fixAtoB();
 //        fourth.CommonBag();
-        fourth.MutlipleAndDeciminal();
+//        fourth.MutlipleAndDeciminal();
+        fourth.IntegerTriangle();
     }
 }
