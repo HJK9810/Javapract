@@ -61,10 +61,27 @@ public class Fourth {
         System.out.println(dp[amount]);
     }
 
+    private void MutlipleAndDeciminal() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputvalue = input.readLine().split(" ");
+        int base = Integer.parseInt(inputvalue[0]);
+        int pow = Integer.parseInt(inputvalue[1]);
+        int divider = Integer.parseInt(inputvalue[2]);
+
+        int multiple = base % divider;
+
+        for (int num = 0; num < pow; num++) {
+            multiple *= base;
+            multiple %= divider;
+        }
+        System.out.println(multiple % divider);
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
 //        fourth.fixAtoB();
-        fourth.CommonBag();
+//        fourth.CommonBag();
+        fourth.MutlipleAndDeciminal();
     }
 }
