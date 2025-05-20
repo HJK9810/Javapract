@@ -339,6 +339,57 @@ public class Third {
         System.out.println(dp[number]);
     }
 
+    private void EasyFastRoute() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] size = input.readLine().split(" ");
+        final int ROW_SIZE = Integer.parseInt(size[0]);
+        final int COL_SIZE = Integer.parseInt(size[1]);
+
+        int[][] board = new int[ROW_SIZE][COL_SIZE];
+        int[] y_moved = {0, 0, 1, -1};
+        int[] x_moved = {1, -1, 0, 0};
+        int[][] dist = new int[ROW_SIZE][COL_SIZE];
+        Queue<int[]> queue = new LinkedList<>();
+
+        for (int i = 0; i < ROW_SIZE; i++) {
+            String[] line = input.readLine().split(" ");
+            for (int j = 0; j < COL_SIZE; j++) {
+                board[i][j] = Integer.parseInt(line[j]);
+                if (board[i][j] == 2) {
+                    dist[i][j] = 0;
+                    queue.add(new int[]{i, j});
+                } else dist[i][j] = -1;
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            for (int i = 0; i < 4; i++) {
+                int curr_x = current[0] + x_moved[i];
+                int curr_y = current[1] + y_moved[i];
+
+                if (curr_x < 0 || curr_y < 0 || curr_x >= ROW_SIZE || curr_y >= COL_SIZE) continue;
+                if (dist[curr_x][curr_y] != -1) continue;
+                if (board[curr_x][curr_y] == 0) continue;
+
+                dist[curr_x][curr_y] = dist[current[0]][current[1]] + 1;
+                queue.add(new int[]{curr_x, curr_y});
+            }
+        }
+
+        for (int i = 0; i < ROW_SIZE; i++) {
+            for (int j = 0; j < COL_SIZE; j++) {
+                output.write((board[i][j] != 0 ? dist[i][j] : 0) + " ");
+            }
+            output.newLine();
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -352,6 +403,7 @@ public class Third {
 //        third.CheckIOIStr();
 //        third.AbsHeap();
 //        third.MinHeap();
-        third.TilingN2();
+//        third.TilingN2();
+        third.EasyFastRoute();
     }
 }
