@@ -441,33 +441,37 @@ public class Third {
 
     private void CutTree() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
         String[] firstLine = input.readLine().split(" ");
         final int SIZE = Integer.parseInt(firstLine[0]);
-        int need_tree = Integer.parseInt(firstLine[1]);
+        final int need_tree = Integer.parseInt(firstLine[1]);
         int[] trees = new int[SIZE];
-        int tallest_tree = Integer.MIN_VALUE;
-
-        int cutted = 0;
 
         String[] treeLines = input.readLine().split(" ");
         for (int i = 0; i < SIZE; i++) {
             trees[i] = Integer.parseInt(treeLines[i]);
-            tallest_tree = Math.max(tallest_tree, trees[i]);
+        }
+        Arrays.sort(trees);
+
+        int left = 0;
+        int right = trees[SIZE - 1];
+        int result = 0;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            long sum = 0;
+            for (int tree : trees) {
+                if (tree > mid) sum += (tree - mid);
+            }
+
+            if (sum >= need_tree) {
+                result = mid;
+                left = mid + 1;
+            } else right = mid - 1;
         }
 
-        for (int tall = tallest_tree; tall >= 0; tall--) {
-            int cutSize = 0;
-            for (int idx = 0; idx < SIZE; idx++) {
-                if (trees[idx] - tall < 0) continue;
-                cutSize += trees[idx] - tall;
-            }
-            if (cutSize >= need_tree) {
-                cutted = tall;
-                break;
-            }
-        }
-
-        System.out.println(cutted);
+        System.out.println(result);
     }
 
     public static void main(String[] args) throws IOException {
