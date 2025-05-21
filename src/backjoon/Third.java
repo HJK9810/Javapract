@@ -390,6 +390,55 @@ public class Third {
         output.close();
     }
 
+    private void OrganicCabage() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        for (int test_case = 0; test_case < SIZE; test_case++) {
+            String[] size = input.readLine().split(" ");
+            final int ROW_SIZE = Integer.parseInt(size[0]);
+            final int COL_SIZE = Integer.parseInt(size[1]);
+            int[][] board = new int[ROW_SIZE][COL_SIZE];
+            Queue<int[]> queue = new LinkedList<>();
+
+            final int[] x_moved = {0, 0, 1, -1};
+            final int[] y_moved = {1, -1, 0, 0};
+
+            int cabages = Integer.parseInt(size[2]);
+            int count = 0;
+            for (int cabage = 0; cabage < cabages; cabage++) {
+                String[] line = input.readLine().split(" ");
+                board[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = 1;
+            }
+            for (int row = 0; row < ROW_SIZE; row++) {
+                for (int col = 0; col < COL_SIZE; col++) {
+                    if (board[row][col] == 0) continue;
+
+                    queue.add(new int[]{row, col});
+                    while (!queue.isEmpty()) {
+                        int[] base = queue.poll();
+
+                        for (int i = 0; i < 4; i++) {
+                            int curr_x = base[0] + x_moved[i];
+                            int curr_y = base[1] + y_moved[i];
+
+                            if (curr_x < 0 || curr_y < 0 || curr_x >= ROW_SIZE || curr_y >= COL_SIZE) continue;
+                            if (board[curr_x][curr_y] == 0) continue;
+                            board[curr_x][curr_y] = 0;
+                            queue.add(new int[]{curr_x, curr_y});
+                        }
+                    }
+                    count++;
+                }
+            }
+            output.write(count + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -404,6 +453,7 @@ public class Third {
 //        third.AbsHeap();
 //        third.MinHeap();
 //        third.TilingN2();
-        third.EasyFastRoute();
+//        third.EasyFastRoute();
+        third.OrganicCabage();
     }
 }
