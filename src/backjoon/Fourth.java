@@ -1,9 +1,10 @@
 package backjoon;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.io.OutputStreamWriter;
 
 public class Fourth {
     private void fixAtoB() throws IOException {
@@ -101,12 +102,47 @@ public class Fourth {
         System.out.println(triangle[0][0]);
     }
 
+    private void PanelSum() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] leng = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(leng[0]);
+        final int count = Integer.parseInt(leng[1]);
+
+        int[][] nums = new int[SIZE][SIZE + 1];
+        for (int i = 0; i < SIZE; i++) {
+            String[] line = input.readLine().split(" ");
+            nums[i][0] = 0;
+            for (int j = 0; j < SIZE; j++) {
+                nums[i][j + 1] = nums[i][j] + Integer.parseInt(line[j]);
+            }
+        }
+
+        for (int i = 0; i < count; i++) {
+            String[] position = input.readLine().split(" ");
+            int y1 = Integer.parseInt(position[0]);
+            int x1 = Integer.parseInt(position[1]);
+            int y2 = Integer.parseInt(position[2]);
+            int x2 = Integer.parseInt(position[3]);
+
+            long sum = 0;
+            for (int row = y1 - 1; row < y2; row++) {
+                sum += (nums[row][x2] - nums[row][x1 - 1]);
+            }
+            output.write(sum + "\n");
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
 //        fourth.fixAtoB();
 //        fourth.CommonBag();
 //        fourth.MutlipleAndDeciminal();
-        fourth.IntegerTriangle();
+//        fourth.IntegerTriangle();
+        fourth.PanelSum();
     }
 }
