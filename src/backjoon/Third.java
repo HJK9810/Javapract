@@ -439,6 +439,37 @@ public class Third {
         output.close();
     }
 
+    private void CutTree() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String[] firstLine = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(firstLine[0]);
+        int need_tree = Integer.parseInt(firstLine[1]);
+        int[] trees = new int[SIZE];
+        int tallest_tree = Integer.MIN_VALUE;
+
+        int cutted = 0;
+
+        String[] treeLines = input.readLine().split(" ");
+        for (int i = 0; i < SIZE; i++) {
+            trees[i] = Integer.parseInt(treeLines[i]);
+            tallest_tree = Math.max(tallest_tree, trees[i]);
+        }
+
+        for (int tall = tallest_tree; tall >= 0; tall--) {
+            int cutSize = 0;
+            for (int idx = 0; idx < SIZE; idx++) {
+                if (trees[idx] - tall < 0) continue;
+                cutSize += trees[idx] - tall;
+            }
+            if (cutSize >= need_tree) {
+                cutted = tall;
+                break;
+            }
+        }
+
+        System.out.println(cutted);
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -454,6 +485,7 @@ public class Third {
 //        third.MinHeap();
 //        third.TilingN2();
 //        third.EasyFastRoute();
-        third.OrganicCabage();
+//        third.OrganicCabage();
+        third.CutTree();
     }
 }
