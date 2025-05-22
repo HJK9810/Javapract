@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -71,10 +72,49 @@ public class Second {
         System.out.println(dp[number]);
     }
 
+    private void CutLANCable() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int need_cable = Integer.parseInt(line[1]);
+        int[] cables = new int[SIZE];
+
+        long right = 0;
+        for (int i = 0; i < SIZE; i++) {
+            cables[i] = Integer.parseInt(input.readLine());
+            if (cables[i] > right) right = cables[i];
+        }
+
+        if (right <= 0) {
+            System.out.println(0);
+            return;
+        }
+
+        long left = 1;
+        long result = 0;
+
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+            long count = 0;
+
+            for (int cable : cables) {
+                count += cable / mid;
+            }
+
+            if (count >= need_cable) {
+                result = mid;
+                left = mid + 1;
+            } else right = mid - 1;
+        }
+        System.out.println(result);
+    }
+
     public static void main(String[] args) throws IOException {
         Second second = new Second();
 
 //        second.PrintQeue();
-        second.TilingN();
+//        second.TilingN();
+        second.CutLANCable();
     }
 }
