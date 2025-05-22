@@ -474,6 +474,31 @@ public class Third {
         System.out.println(result);
     }
 
+    private void PokemonMaster() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int QUEST = Integer.parseInt(line[1]);
+        HashMap<String, Integer> map = new HashMap<>();
+        String[] dictionary = new String[SIZE];
+
+        for (int i = 0; i < SIZE; i++) {
+            String name = input.readLine();
+            map.put(name, i + 1);
+            dictionary[i] = name;
+        }
+
+        for (int i = 0; i < QUEST; i++) {
+            String question = input.readLine();
+            if (question.matches("\\d*")) sb.append(dictionary[Integer.parseInt(question) - 1]);
+            else sb.append(map.get(question));
+            sb.append('\n');
+        }
+        System.out.println(sb);
+    }
+
     public static void main(String[] args) throws IOException {
         Third third = new Third();
 
@@ -490,6 +515,7 @@ public class Third {
 //        third.TilingN2();
 //        third.EasyFastRoute();
 //        third.OrganicCabage();
-        third.CutTree();
+//        third.CutTree();
+        third.PokemonMaster();
     }
 }
