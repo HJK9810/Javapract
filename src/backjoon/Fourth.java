@@ -136,6 +136,34 @@ public class Fourth {
         output.close();
     }
 
+    private void insertNum(int[] base, int from, int depth, int SIZE, int amount, StringBuilder sb) throws IOException {
+        if (depth == amount) {
+            for (int i = 0; i < amount; i++) {
+                sb.append(base[i]).append(" ");
+            }
+            sb.append("\n");
+            return;
+        }
+
+        for (int num = from; num <= SIZE; num++) {
+            base[depth] = num;
+            insertNum(base, from + 1, depth + 1, SIZE, amount, sb);
+        }
+    }
+
+    private void NandM2() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int amount = Integer.parseInt(line[1]);
+
+        int[] base = new int[amount];
+        insertNum(base, 1, 0, SIZE, amount, sb);
+        System.out.println(sb);
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
