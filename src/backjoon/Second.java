@@ -5,11 +5,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Second {
     private void PrintQeue() throws IOException {
@@ -110,11 +110,39 @@ public class Second {
         System.out.println(result);
     }
 
+    private void Parentheses() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        final int SIZE = Integer.parseInt(input.readLine());
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < SIZE; i++) {
+            String[] line = input.readLine().split("");
+            Boolean isNo = false;
+
+            for (int idx = 0; idx < line.length; idx++) {
+                if (line[idx].equals("(")) stack.push(idx);
+                else if (stack.isEmpty()) {
+                    output.write("NO\n");
+                    isNo = true;
+                    break;
+                } else stack.pop();
+            }
+            if (stack.isEmpty() && !isNo) output.write("YES\n");
+            else if (!isNo) output.write("NO\n");
+            stack.clear();
+        }
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException {
         Second second = new Second();
 
 //        second.PrintQeue();
 //        second.TilingN();
-        second.CutLANCable();
+//        second.CutLANCable();
+        second.Parentheses();
     }
 }
