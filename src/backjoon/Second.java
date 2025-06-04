@@ -137,12 +137,47 @@ public class Second {
         output.close();
     }
 
+    private void JosephusQuestion() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuffer sb = new StringBuffer();
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int number = Integer.parseInt(line[1]);
+
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 1;
+
+        for (int num = 0; num < SIZE; num++) {
+            queue.offer(num + 1);
+        }
+
+        sb.append("<");
+        while (!queue.isEmpty()) {
+            if (queue.size() == 1) {
+                sb.append(queue.peek());
+                break;
+            }
+
+            if (count == number) {
+                sb.append(queue.poll()).append(", ");
+                count = 1;
+            } else {
+                queue.offer(queue.poll());
+                count++;
+            }
+        }
+
+        System.out.println(sb + ">");
+    }
+
     public static void main(String[] args) throws IOException {
         Second second = new Second();
 
 //        second.PrintQeue();
 //        second.TilingN();
 //        second.CutLANCable();
-        second.Parentheses();
+//        second.Parentheses();
+        second.JosephusQuestion();
     }
 }
