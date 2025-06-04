@@ -164,6 +164,28 @@ public class Fourth {
         System.out.println(sb);
     }
 
+    private void Fibonacci6() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        final long SIZE = Long.parseLong(input.readLine());
+        final long base = 1000000007;
+
+        if (SIZE == 0) {
+            System.out.println(0);
+            return;
+        }
+
+        long first = 0;
+        long second = 1;
+
+        for (int i = 2; i <= SIZE; i++) {
+            long temp = (first + second) % base;
+            first = second;
+            second = temp;
+        }
+        System.out.println(second);
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
@@ -171,6 +193,7 @@ public class Fourth {
 //        fourth.CommonBag();
 //        fourth.MutlipleAndDeciminal();
 //        fourth.IntegerTriangle();
-        fourth.PanelSum();
+//        fourth.PanelSum();
+        fourth.Fibonacci6();
     }
 }
