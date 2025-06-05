@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Fourth {
     private void fixAtoB() throws IOException {
@@ -164,26 +166,31 @@ public class Fourth {
         System.out.println(sb);
     }
 
+    private long fib(long number, Map<Long, Long> memo) {
+        final long base = 1000000007;
+
+        if (number <= 1) return number;
+        if (memo.containsKey(number)) return memo.get(number);
+
+        long half = number % 2 == 0 ? number / 2 : (number + 1) / 2;
+        long first = fib(half, memo);
+        long second = fib(half - 1, memo);
+
+        long result = number % 2 == 0
+                ? (first * ((2 * second % base + first) % base)) % base
+                : (first * first % base + second * second % base) % base;
+
+        memo.put(number, result);
+        return result;
+    }
+
     private void Fibonacci6() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         final long SIZE = Long.parseLong(input.readLine());
-        final long base = 1000000007;
+        Map<Long, Long> memo = new HashMap<>();
 
-        if (SIZE == 0) {
-            System.out.println(0);
-            return;
-        }
-
-        long first = 0;
-        long second = 1;
-
-        for (int i = 2; i <= SIZE; i++) {
-            long temp = (first + second) % base;
-            first = second;
-            second = temp;
-        }
-        System.out.println(second);
+        System.out.println(fib(SIZE, memo));
     }
 
     public static void main(String[] args) throws IOException {
