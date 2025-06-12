@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BackTracking {
     private static boolean[] visited;
@@ -81,9 +83,28 @@ public class BackTracking {
         System.out.print(sb);
     }
 
+    private void NandM11() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        sb = new StringBuilder();
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int depth = Integer.parseInt(line[1]);
+
+        Set<Integer> set = new HashSet<>();
+        String[] strBase = input.readLine().split(" ");
+        for (int i = 0; i < SIZE; i++) {
+            set.add(Integer.parseInt(strBase[i]));
+        }
+        int[] base = set.stream().mapToInt(num -> num).toArray();
+        permutation(base, new int[depth], 0, depth);
+        System.out.print(sb);
+    }
+
     public static void main(String[] args) throws IOException {
         BackTracking backtraking = new BackTracking();
 
-        backtraking.NandM3();
+//        backtraking.NandM3();
+        backtraking.NandM11();
     }
 }
