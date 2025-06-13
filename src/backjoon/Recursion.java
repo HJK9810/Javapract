@@ -92,56 +92,44 @@ public class Recursion {
     }
 
     // 알고리즘 수업
-    private static int[] temp;
-    private static int count;
-    private static int result;
+    private static int count = 0;
+    private static int result = -1;
 
-    private static void merge_sort(int[] ary, int p, int r, int forC) {
-        if (p == r) return;
-        if (count == forC) return;
-
-        int q = (p + r) / 2;
-        merge_sort(ary, p, q, forC);
-        merge_sort(ary, q + 1, r, forC);
-        merge(ary, p, q, r, forC);
+    private static void merge_sort(int[] ary, int left, int right, int forC) {
+        if (left < right) {
+            int mid =  (right + left) / 2;
+            merge_sort(ary, left, mid, forC);
+            merge_sort(ary, left, mid, forC);
+            merge_sort(ary, mid + 1, right, forC);
+            merge(ary, left, mid, right, forC);
+        }
     }
 
-    private static void merge(int[] ary, int p, int q, int r, int forC) {
-        int i = p;
-        int j = q + 1;
-        int t = 1;
+    private static void merge(int[] ary, int left, int mid, int right, int forC) {
+        int[] temp = new int[right - left + 1];
+        int i = left, j = mid + 1, t = 0;
 
-        while (i <= q && j <= r) {
+        while (i <= mid && j <= right) {
             if (ary[i] <= ary[j]) {
-                temp[t] = ary[i];
-                t++;
-                i++;
+                temp[t++] = ary[i++];
             } else {
-                temp[t] = ary[j];
-                t++;
-                j++;
+                temp[t++] = ary[j++];
             }
         }
 
-        if (i > q) {
-            while (i <= q) {
-                temp[t] = ary[i];
-                t++;
-                i++;
-            }
-        } else {
-            while (j <= r) {
-                temp[t] = ary[j];
-                t++;
-                j++;
-            }
+        while (i <= mid) {
+            temp[t++] = ary[i++];
+        }
+        while (j <= right) {
+            temp[t++] = ary[j++];
         }
 
-        for (int idx = p; idx < r; idx++) {
-            ary[idx] = temp[idx];
-            result = temp[idx];
+        for (int idx = 0; idx < temp.length; idx++) {
+            ary[left + idx] = temp[idx];
             count++;
-            if (count == forC) break;
+            if (count == forC) {
+                result = temp[idx];
+            }
         }
     }
 
@@ -157,11 +145,8 @@ public class Recursion {
             numbers[i] = Integer.parseInt(ary[i]);
         }
 
-        temp = new int[SIZE];
-        count = 0;
         merge_sort(numbers, 0, SIZE - 1, forCount);
-        if (count == forCount) System.out.println(result);
-        else System.out.println(-1);
+        System.out.println(result);
     }
 
     static StringBuffer sb = new StringBuffer();
@@ -226,8 +211,8 @@ public class Recursion {
 //        recursion.Fibonacci(); // 피보나치 수5
 //        recursion.Recurs();
 //        recursion.RecurRecur(); // 재귀의 귀재
-//        recursion.AlgorismClass(); // 알고리즘 수업
+        recursion.AlgorismClass(); // 알고리즘 수업
 //        recursion.DrawStart(); // 별찍기-10
-        recursion.HonoiTower(); // 하노이의탑
+//        recursion.HonoiTower(); // 하노이의탑
     }
 }
