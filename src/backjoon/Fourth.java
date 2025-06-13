@@ -5,7 +5,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Fourth {
@@ -193,6 +196,32 @@ public class Fourth {
         System.out.println(fib(SIZE, memo));
     }
 
+    private void LongestSequence() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        int[] numbers = new int[SIZE];
+        String[] line = input.readLine().split(" ");
+        for (int i = 0; i < SIZE; i++) {
+            numbers[i] = Integer.parseInt(line[i]);
+        }
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int num : numbers) {
+            int index = Collections.binarySearch(list, num);
+            if (index < 0) index = -(index + 1);
+
+            if (index == list.size()) {
+                list.add(num);
+            } else {
+                list.set(index, num);
+            }
+        }
+
+        System.out.println(list.size());
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
@@ -201,6 +230,7 @@ public class Fourth {
 //        fourth.MutlipleAndDeciminal();
 //        fourth.IntegerTriangle();
 //        fourth.PanelSum();
-        fourth.Fibonacci6();
+//        fourth.Fibonacci6();
+        fourth.LongestSequence();
     }
 }
