@@ -226,44 +226,21 @@ public class Fourth {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         final char[] first = input.readLine().toCharArray();
-        char[] second = input.readLine().toCharArray();
+        final char[] second = input.readLine().toCharArray();
 
-        int firstCount = 0;
-        int firstIdx = 0;
+        int[][] dp = new int[first.length + 1][second.length + 1];
 
-        for (char alpha : second) {
-            if (first[firstIdx] == alpha) {
-                firstCount++;
-                firstIdx++;
-            }
-        }
-        if (firstIdx != first.length) {
-            while (firstIdx < first.length) {
-                if (first[firstIdx] == second[second.length - 1]) {
-                    firstCount++;
+        for (int firstIdx = 1; firstIdx <= first.length; firstIdx++) {
+            for (int secondIdx = 1; secondIdx <= second.length; secondIdx++) {
+                if (first[firstIdx - 1] == second[secondIdx - 1]) {
+                    dp[firstIdx][secondIdx] = dp[firstIdx - 1][secondIdx - 1] + 1;
+                } else {
+                    dp[firstIdx][secondIdx] = Math.max(dp[firstIdx][secondIdx - 1], dp[firstIdx - 1][secondIdx]);
                 }
-                firstIdx++;
             }
         }
 
-        int secondCount = 0;
-        int secondIdx = 0;
-        for (char alpha : first) {
-            if (second[secondIdx] == alpha) {
-                secondCount++;
-                secondIdx++;
-            }
-        }
-        if (secondIdx != second.length) {
-            while (secondIdx < second.length) {
-                if (second[secondIdx] == first[first.length - 1]) {
-                    secondCount++;
-                }
-                secondIdx++;
-            }
-        }
-
-        System.out.println(Math.max(firstCount, secondCount));
+        System.out.println(dp[first.length][second.length]);
     }
 
     public static void main(String[] args) throws IOException {
