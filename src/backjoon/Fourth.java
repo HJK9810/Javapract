@@ -222,6 +222,50 @@ public class Fourth {
         System.out.println(list.size());
     }
 
+    private void LCS() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        final char[] first = input.readLine().toCharArray();
+        char[] second = input.readLine().toCharArray();
+
+        int firstCount = 0;
+        int firstIdx = 0;
+
+        for (char alpha : second) {
+            if (first[firstIdx] == alpha) {
+                firstCount++;
+                firstIdx++;
+            }
+        }
+        if (firstIdx != first.length) {
+            while (firstIdx < first.length) {
+                if (first[firstIdx] == second[second.length - 1]) {
+                    firstCount++;
+                }
+                firstIdx++;
+            }
+        }
+
+        int secondCount = 0;
+        int secondIdx = 0;
+        for (char alpha : first) {
+            if (second[secondIdx] == alpha) {
+                secondCount++;
+                secondIdx++;
+            }
+        }
+        if (secondIdx != second.length) {
+            while (secondIdx < second.length) {
+                if (second[secondIdx] == first[first.length - 1]) {
+                    secondCount++;
+                }
+                secondIdx++;
+            }
+        }
+
+        System.out.println(Math.max(firstCount, secondCount));
+    }
+
     public static void main(String[] args) throws IOException {
         Fourth fourth = new Fourth();
 
@@ -231,6 +275,7 @@ public class Fourth {
 //        fourth.IntegerTriangle();
 //        fourth.PanelSum();
 //        fourth.Fibonacci6();
-        fourth.LongestSequence();
+//        fourth.LongestSequence();
+        fourth.LCS();
     }
 }
