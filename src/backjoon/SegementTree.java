@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 
 public class SegementTree {
     private long[] tree;
+    private final long MOD = 1000000007;
 
     private void update(int index, long diff, int node, int start, int end) {
         if (index < start || end < index) return;
@@ -31,7 +32,7 @@ public class SegementTree {
         int mid = (start + end) / 2;
         if (index <= mid) update2(index, value, 2 * node, start, mid);
         else update2(index, value, 2 * node + 1, mid + 1, end);
-        tree[node] = tree[2 * node] * tree[2 * node + 1];
+        tree[node] = (tree[2 * node] * tree[2 * node + 1]) % MOD;
     }
 
     private void init(int node, int start, int end, long[] initial) {
@@ -55,7 +56,7 @@ public class SegementTree {
         int mid = (start + end) / 2;
         init2(2 * node, start, mid, initial);
         init2(2 * node + 1, mid + 1, end, initial);
-        tree[node] = tree[2 * node] * tree[2 * node + 1];
+        tree[node] = (tree[2 * node] * tree[2 * node + 1]) % MOD;
     }
 
     private long query(int left, int right, int node, int start, int end) {
@@ -71,7 +72,7 @@ public class SegementTree {
         if (left <= start && end <= right) return tree[node];
 
         int mid = (start + end) / 2;
-        return multiQuery(left, right, 2 * node, start, mid) * multiQuery(left, right, 2 * node + 1, mid + 1, end);
+        return (multiQuery(left, right, 2 * node, start, mid) * multiQuery(left, right, 2 * node + 1, mid + 1, end)) % MOD;
     }
 
     private void IntervalSum() throws IOException {
