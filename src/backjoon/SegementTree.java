@@ -21,7 +21,7 @@ public class SegementTree {
         }
     }
 
-    private void init(int node, int start, int end, int[] initial) {
+    private void init(int node, int start, int end, long[] initial) {
         if (start == end) {
             tree[node] = initial[start];
             return;
@@ -52,9 +52,9 @@ public class SegementTree {
 
         tree = new long[4 * SIZE];
 
-        int[] initial = new int[SIZE];
+        long[] initial = new long[SIZE];
         for (int index = 0; index < SIZE; index++) {
-            initial[index] = Integer.parseInt(input.readLine());
+            initial[index] = Long.parseLong(input.readLine());
         }
         init(1, 0, SIZE - 1, initial);
 
@@ -64,8 +64,8 @@ public class SegementTree {
             String op = order[0];
             int start = Integer.parseInt(order[1]) - 1;
             if (op.equals("1")) {
-                long diff = Integer.parseInt(order[2]) - initial[start];
-                initial[start] = Integer.parseInt(order[2]);
+                long diff = Long.parseLong(order[2]) - initial[start];
+                initial[start] = Long.parseLong(order[2]);
                 update(start, diff, 1, 0, SIZE - 1);
             } else {
                 long sum = query(start, Integer.parseInt(order[2]) - 1, 1, 0, SIZE - 1);
