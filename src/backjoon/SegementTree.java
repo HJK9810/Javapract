@@ -7,17 +7,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class SegementTree {
-    private int[] tree;
+    private long[] tree;
 
-    private void update(int index, int value, int node, int start, int end) {
-        if (start == end) {
-            tree[node] = value;
-            return;
+    private void update(int index, long diff, int node, int start, int end) {
+        if (index < start || end < index) return;
+
+        tree[node] += diff;
+
+        if (start != end) {
+            int mid = (start + end) / 2;
+            if (index <= mid) update(index, diff, 2 * node, start, mid);
+            else update(index, diff, 2 * node + 1, mid + 1, end);
         }
-
-        int mid = (start + end) / 2;
-        if (index <= mid) update(index, value, 2 * node, start, mid);
-        else update(index, value, 2 * node + 1, mid + 1, end);
     }
 
     private void init(int node, int start, int end, int[] initial) {
@@ -32,7 +33,7 @@ public class SegementTree {
         tree[node] = tree[2 * node] + tree[2 * node + 1];
     }
 
-    private int query(int left, int right, int node, int start, int end) {
+    private long query(int left, int right, int node, int start, int end) {
         if (right < start || end < left) return 0;
         if (left <= start && end <= right) return tree[node];
 
@@ -49,8 +50,7 @@ public class SegementTree {
         final int updateSize = Integer.parseInt(line[1]);
         final int sumSize = Integer.parseInt(line[2]);
 
-        int treeSize = (int) Math.pow(Math.ceil((double) SIZE), 2) << 1;
-        tree = new int[treeSize];
+        tree = new long[4 * SIZE];
 
         int[] initial = new int[SIZE];
         for (int index = 0; index < SIZE; index++) {
@@ -60,10 +60,15 @@ public class SegementTree {
 
         for (int count = 0; count < updateSize + sumSize; count++) {
             String[] order = input.readLine().split(" ");
-            if (order[0].equals("1")) {
-                update(Integer.parseInt(order[1]), Integer.parseInt(order[2]), 1, 1, SIZE);
+
+            String op = order[0];
+            int start = Integer.parseInt(order[1]) - 1;
+            if (op.equals("1")) {
+                long diff = Integer.parseInt(order[2]) - initial[start];
+                initial[start] = Integer.parseInt(order[2]);
+                update(start, diff, 1, 0, SIZE - 1);
             } else {
-                int sum = query(Integer.parseInt(order[1]), Integer.parseInt(order[2]), 1, 1, SIZE);
+                long sum = query(start, Integer.parseInt(order[2]) - 1, 1, 0, SIZE - 1);
                 output.write(sum + "\n");
             }
         }
