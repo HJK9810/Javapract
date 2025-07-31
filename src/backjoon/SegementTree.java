@@ -59,6 +59,18 @@ public class SegementTree {
         tree[node] = (tree[2 * node] * tree[2 * node + 1]) % MOD;
     }
 
+    private void minInit(int node, int start, int end, long[] initial) {
+        if (start == end) {
+            tree[node] = initial[start];
+            return;
+        }
+
+        int mid = (start + end) / 2;
+        minInit(2 * node, start, mid, initial);
+        minInit(2 * node + 1, mid + 1, end, initial);
+        tree[node] = Math.min(tree[2 * node], tree[2 * node + 1]);
+    }
+
     private long query(int left, int right, int node, int start, int end) {
         if (right < start || end < left) return 0;
         if (left <= start && end <= right) return tree[node];
@@ -73,6 +85,17 @@ public class SegementTree {
 
         int mid = (start + end) / 2;
         return (multiQuery(left, right, 2 * node, start, mid) * multiQuery(left, right, 2 * node + 1, mid + 1, end)) % MOD;
+    }
+
+    private long minQuery(int left, int right, int node, int start, int end) {
+        if (right < start || end < left) return Integer.MAX_VALUE;
+        if (left <= start && end <= right) return tree[node];
+
+        int mid = (start + end) / 2;
+        long first = minQuery(left, right, 2 * node, start, mid);
+        long second = minQuery(left, right, 2 * node + 1, mid + 1, end);
+
+        return Math.min(first, second);
     }
 
     private void IntervalSum() throws IOException {
@@ -147,10 +170,39 @@ public class SegementTree {
         output.close();
     }
 
+    private void CalcMin() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int questSize = Integer.parseInt(line[1]);
+
+        tree = new long[4 * SIZE];
+        long[] initial = new long[SIZE];
+        for (int index = 0; index < SIZE; index++) {
+            initial[index] = Integer.parseInt(input.readLine());
+        }
+        minInit(1, 0, SIZE - 1, initial);
+
+        for (int index = 0; index < questSize; index++) {
+            String[] order = input.readLine().split(" ");
+            int start = Integer.parseInt(order[0]) - 1;
+            int end = Integer.parseInt(order[1]) - 1;
+
+            long min = minQuery(start, end, 1, 0, SIZE - 1);
+            output.write(min + "\n");
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segementTree = new SegementTree();
 
 //        segementTree.IntervalSum();
-        segementTree.IntervalMulti();
+//        segementTree.IntervalMulti();
+        segementTree.CalcMin();
     }
 }
