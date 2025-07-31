@@ -35,6 +35,19 @@ public class SegementTree {
         tree[node] = (tree[2 * node] * tree[2 * node + 1]) % MOD;
     }
 
+    private void update3(int index, long value, int node, int start, int end) {
+        if (index < start || end < index) return;
+        if (start == end) {
+            tree[node] = value;
+            return;
+        }
+
+        int mid = (start + end) / 2;
+        if (index <= mid) update3(index, value, 2 * node, start, mid);
+        else update3(index, value, 2 * node + 1, mid + 1, end);
+        tree[node] = tree[2 * node] + tree[2 * node + 1];
+    }
+
     private void init(int node, int start, int end, long[] initial) {
         if (start == end) {
             tree[node] = initial[start];
@@ -381,9 +394,8 @@ public class SegementTree {
             int second = Integer.parseInt(order[2]);
 
             if (op.equals("1")) {
-                long diff = second - initial[first];
-                initial[first] = second;
-                update(first, diff, 1, 0, SIZE - 1);
+                initial[first] += second;
+                update3(first, initial[first], 1, 0, SIZE - 1);
             } else {
                 long sum = query(first, second - 1, 1, 0, SIZE - 1);
                 output.write(sum + "\n");
