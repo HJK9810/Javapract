@@ -254,12 +254,48 @@ public class SegementTree {
         output.close();
     }
 
+    private void CoffeeHouseSum() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int questCount = Integer.parseInt(line[1]);
+
+        tree = new long[4 * SIZE];
+        long[] initial = new long[SIZE];
+        String[] inputLine = input.readLine().split(" ");
+        for (int index = 0; index < SIZE; index++) {
+            initial[index] = Long.parseLong(inputLine[index]);
+        }
+        init(1, 0, SIZE - 1, initial);
+
+        for (int count = 0; count < questCount; count++) {
+            String[] order = input.readLine().split(" ");
+            int start = Integer.parseInt(order[0]) - 1;
+            int end = Integer.parseInt(order[1]) - 1;
+            int index = Integer.parseInt(order[2]) - 1;
+            long value = Long.parseLong(order[3]);
+
+            long sum = query(start, end, 1, 0, SIZE - 1);
+            output.write(sum + "\n");
+
+            long diff = value - initial[index];
+            initial[index] = value;
+            update(index, diff, 1, 0, SIZE - 1);
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segementTree = new SegementTree();
 
 //        segementTree.IntervalSum();
 //        segementTree.IntervalMulti();
 //        segementTree.CalcMin();
-        segementTree.CalcMinAndMax();
+//        segementTree.CalcMinAndMax();
+        segementTree.CoffeeHouseSum();
     }
 }
