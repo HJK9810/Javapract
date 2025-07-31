@@ -272,12 +272,12 @@ public class SegementTree {
 
         for (int count = 0; count < questCount; count++) {
             String[] order = input.readLine().split(" ");
-            int start = Integer.parseInt(order[0]) - 1;
-            int end = Integer.parseInt(order[1]) - 1;
+            int first = Integer.parseInt(order[0]) - 1;
+            int second = Integer.parseInt(order[1]) - 1;
             int index = Integer.parseInt(order[2]) - 1;
             long value = Long.parseLong(order[3]);
 
-            long sum = query(start, end, 1, 0, SIZE - 1);
+            long sum = query(Math.min(first, second), Math.max(first, second), 1, 0, SIZE - 1);
             output.write(sum + "\n");
 
             long diff = value - initial[index];
