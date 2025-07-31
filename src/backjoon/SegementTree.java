@@ -304,13 +304,14 @@ public class SegementTree {
             String[] order = input.readLine().split(" ");
 
             String op = order[0];
-            int start = Integer.parseInt(order[1]) - 1;
+            int first = Integer.parseInt(order[1]) - 1;
+            int second = Integer.parseInt(order[2]);
             if (op.equals("1")) {
-                long diff = Long.parseLong(order[2]) - initial[start];
-                initial[start] = Long.parseLong(order[2]);
-                update(start, diff, 1, 0, SIZE - 1);
+                long diff = second - initial[first];
+                initial[first] = second;
+                update(first, diff, 1, 0, SIZE - 1);
             } else {
-                long sum = query(start, Integer.parseInt(order[2]) - 1, 1, 0, SIZE - 1);
+                long sum = query(Math.min(first, second - 1), Math.max(first, second - 1), 1, 0, SIZE - 1);
                 output.write(sum + "\n");
             }
         }
