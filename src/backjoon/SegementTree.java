@@ -289,6 +289,36 @@ public class SegementTree {
         output.close();
     }
 
+    private void IntervalSum7() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int questSize = Integer.parseInt(line[1]);
+
+        tree = new long[4 * SIZE];
+        long[] initial = new long[SIZE];
+
+        for (int count = 0; count < questSize; count++) {
+            String[] order = input.readLine().split(" ");
+
+            String op = order[0];
+            int start = Integer.parseInt(order[1]) - 1;
+            if (op.equals("1")) {
+                long diff = Long.parseLong(order[2]) - initial[start];
+                initial[start] = Long.parseLong(order[2]);
+                update(start, diff, 1, 0, SIZE - 1);
+            } else {
+                long sum = query(start, Integer.parseInt(order[2]) - 1, 1, 0, SIZE - 1);
+                output.write(sum + "\n");
+            }
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segementTree = new SegementTree();
 
@@ -296,6 +326,7 @@ public class SegementTree {
 //        segementTree.IntervalMulti();
 //        segementTree.CalcMin();
 //        segementTree.CalcMinAndMax();
-        segementTree.CoffeeHouseSum();
+//        segementTree.CoffeeHouseSum();
+        segementTree.IntervalSum7();
     }
 }
