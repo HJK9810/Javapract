@@ -363,6 +363,37 @@ public class SegementTree {
         System.out.println(sb.toString());
     }
 
+    private void FinancialLedger() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int questSize = Integer.parseInt(line[1]);
+
+        tree = new long[4 * SIZE];
+        long[] initial = new long[SIZE];
+
+        for (int count = 0; count < questSize; count++) {
+            String[] order = input.readLine().split(" ");
+            String op = order[0];
+            int first = Integer.parseInt(order[1]) - 1;
+            int second = Integer.parseInt(order[2]);
+
+            if (op.equals("1")) {
+                long diff = second - initial[first];
+                initial[first] = second;
+                update(first, diff, 1, 0, SIZE - 1);
+            } else {
+                long sum = query(first, second - 1, 1, 0, SIZE - 1);
+                output.write(sum + "\n");
+            }
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segmentTree = new SegementTree();
 
@@ -372,6 +403,7 @@ public class SegementTree {
 //        segmentTree.CalcMinAndMax();
 //        segmentTree.CoffeeHouseSum();
 //        segmentTree.IntervalSum7();
-        segmentTree.DrunkenGame();
+//        segmentTree.DrunkenGame();
+        segmentTree.FinancialLedger();
     }
 }
