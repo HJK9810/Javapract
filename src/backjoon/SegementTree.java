@@ -324,10 +324,14 @@ public class SegementTree {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         StringBuffer sb = new StringBuffer();
 
-        for (int person = 0; person < 2; person++) {
-            String[] line = input.readLine().split(" ");
-            final int SIZE = Integer.parseInt(line[0]);
-            final int questSize = Integer.parseInt(line[1]);
+        String line;
+        while ((line = input.readLine()) != null) {
+            line = line.trim();
+            if (line.isEmpty()) continue;
+
+            String[] header = input.readLine().split(" ");
+            final int SIZE = Integer.parseInt(header[0]);
+            final int questSize = Integer.parseInt(header[1]);
 
             tree = new long[4 * SIZE];
             long[] initial = new long[SIZE];
