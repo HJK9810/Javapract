@@ -61,14 +61,26 @@ public class SegementTree {
 
     private void minInit(int node, int start, int end, long[] initial) {
         if (start == end) {
-            tree[node] = initial[start];
+            minTree[node] = initial[start];
             return;
         }
 
         int mid = (start + end) / 2;
         minInit(2 * node, start, mid, initial);
         minInit(2 * node + 1, mid + 1, end, initial);
-        tree[node] = Math.min(tree[2 * node], tree[2 * node + 1]);
+        minTree[node] = Math.min(minTree[2 * node], minTree[2 * node + 1]);
+    }
+
+    private void maxInit(int node, int start, int end, long[] initial) {
+        if (start == end) {
+            maxTree[node] = initial[start];
+            return;
+        }
+
+        int mid = (start + end) / 2;
+        maxInit(2 * node, start, mid, initial);
+        maxInit(2 * node + 1, mid + 1, end, initial);
+        maxTree[node] = Math.max(maxTree[2 * node], maxTree[2 * node + 1]);
     }
 
     private long query(int left, int right, int node, int start, int end) {
@@ -88,14 +100,25 @@ public class SegementTree {
     }
 
     private long minQuery(int left, int right, int node, int start, int end) {
-        if (right < start || end < left) return Integer.MAX_VALUE;
-        if (left <= start && end <= right) return tree[node];
+        if (right < start || end < left) return Long.MAX_VALUE;
+        if (left <= start && end <= right) return minTree[node];
 
         int mid = (start + end) / 2;
         long first = minQuery(left, right, 2 * node, start, mid);
         long second = minQuery(left, right, 2 * node + 1, mid + 1, end);
 
         return Math.min(first, second);
+    }
+
+    private long maxQuery(int left, int right, int node, int start, int end) {
+        if (right < start || end < left) return Long.MIN_VALUE;
+        if (left <= start && end <= right) return maxTree[node];
+
+        int mid = (start + end) / 2;
+        long first = maxQuery(left, right, 2 * node, start, mid);
+        long second = maxQuery(left, right, 2 * node + 1, mid + 1, end);
+
+        return Math.max(first, second);
     }
 
     private void IntervalSum() throws IOException {
@@ -198,11 +221,45 @@ public class SegementTree {
         output.close();
     }
 
+    private long[] minTree;
+    private long[] maxTree;
+    private void CalcMinAndMax() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int questSize = Integer.parseInt(line[1]);
+
+        minTree = new long[4 * SIZE];
+        maxTree = new long[4 * SIZE];
+        long[] initial = new long[SIZE];
+        for (int index = 0; index < SIZE; index++) {
+            initial[index] = Integer.parseInt(input.readLine());
+        }
+        minInit(1, 0, SIZE - 1, initial);
+        maxInit(1, 0, SIZE - 1, initial);
+
+        for (int index = 0; index < questSize; index++) {
+            String[] order = input.readLine().split(" ");
+            int start = Integer.parseInt(order[0]) - 1;
+            int end = Integer.parseInt(order[1]) - 1;
+
+            long min = minQuery(start, end, 1, 0, SIZE - 1);
+            long max = maxQuery(start, end, 1, 0, SIZE - 1);
+            output.write(min + " " + max + "\n");
+        }
+
+        output.flush();
+        output.close();
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segementTree = new SegementTree();
 
 //        segementTree.IntervalSum();
 //        segementTree.IntervalMulti();
-        segementTree.CalcMin();
+//        segementTree.CalcMin();
+        segementTree.CalcMinAndMax();
     }
 }
