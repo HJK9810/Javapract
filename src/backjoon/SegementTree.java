@@ -320,14 +320,54 @@ public class SegementTree {
         output.close();
     }
 
-    public static void main(String[] args) throws IOException  {
-        SegementTree segementTree = new SegementTree();
+    private void DrunkenGame() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuffer sb = new StringBuffer();
 
-//        segementTree.IntervalSum();
-//        segementTree.IntervalMulti();
-//        segementTree.CalcMin();
-//        segementTree.CalcMinAndMax();
-//        segementTree.CoffeeHouseSum();
-        segementTree.IntervalSum7();
+        for (int person = 0; person < 2; person++) {
+            String[] line = input.readLine().split(" ");
+            final int SIZE = Integer.parseInt(line[0]);
+            final int questSize = Integer.parseInt(line[1]);
+
+            tree = new long[4 * SIZE];
+            long[] initial = new long[SIZE];
+            String[] inputLine = input.readLine().split(" ");
+            for (int index = 0; index < SIZE; index++) {
+                initial[index] = Long.parseLong(inputLine[index]);
+            }
+            init2(1,  0, SIZE - 1, initial);
+
+            for (int count = 0; count < questSize; count++) {
+                String[] order = input.readLine().split(" ");
+                String op = order[0];
+                int first = Integer.parseInt(order[1]) - 1;
+                int second = Integer.parseInt(order[2]);
+
+                if (op.equals("P")) {
+                    long multiple = multiQuery(first, second - 1, 1, 0, SIZE - 1);
+                    if (multiple < 0) sb.append("-");
+                    else if (multiple > 0) sb.append("+");
+                    else sb.append("0");
+                } else {
+                    initial[first] = second;
+                    update2(first, second, 1, 0, SIZE - 1);
+                }
+            }
+
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+    }
+
+    public static void main(String[] args) throws IOException  {
+        SegementTree segmentTree = new SegementTree();
+
+//        segmentTree.IntervalSum();
+//        segmentTree.IntervalMulti();
+//        segmentTree.CalcMin();
+//        segmentTree.CalcMinAndMax();
+//        segmentTree.CoffeeHouseSum();
+//        segmentTree.IntervalSum7();
+        segmentTree.DrunkenGame();
     }
 }
