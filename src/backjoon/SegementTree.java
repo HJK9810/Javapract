@@ -406,6 +406,34 @@ public class SegementTree {
         output.close();
     }
 
+    private void StrangeArray() throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        final int SIZE = Integer.parseInt(input.readLine());
+
+        for (int count = 0; count < SIZE; count++) {
+            int arySize = Integer.parseInt(input.readLine());
+            String[] line = input.readLine().split(" ");
+
+            boolean hasIncreased = false;
+            boolean isValid = true;
+            for (int index = 1; index < arySize; index++) {
+                int before = Integer.parseInt(line[index - 1]);
+                int now = Integer.parseInt(line[index]);
+
+                if (now > before) hasIncreased = true;
+                else if (now < before && hasIncreased) {
+                    isValid = false;
+                    break;
+                }
+            }
+            sb.append(isValid ? "Yes" : "No").append("\n");
+        }
+
+        System.out.println(sb);
+    }
+
     public static void main(String[] args) throws IOException  {
         SegementTree segmentTree = new SegementTree();
 
@@ -416,6 +444,7 @@ public class SegementTree {
 //        segmentTree.CoffeeHouseSum();
 //        segmentTree.IntervalSum7();
 //        segmentTree.DrunkenGame();
-        segmentTree.FinancialLedger();
+//        segmentTree.FinancialLedger();
+        segmentTree.StrangeArray();
     }
 }
