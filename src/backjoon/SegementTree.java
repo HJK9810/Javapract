@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class SegementTree {
     private long[] tree;
@@ -96,6 +97,20 @@ public class SegementTree {
         maxTree[node] = Math.max(maxTree[2 * node], maxTree[2 * node + 1]);
     }
 
+    private int strangeInit(int node, int start, int end, int[] initial) {
+        if (start == end) {
+            tree[node] = start;
+            return start;
+        }
+
+        int mid = (start + end) / 2;
+        int left = strangeInit(node * 2, start, mid, initial);
+        int right = strangeInit(node * 2 + 1, mid + 1, end, initial);
+
+        tree[node] = initial[left] >= initial[right] ? left : right;
+        return (int) tree[node];
+    }
+
     private long query(int left, int right, int node, int start, int end) {
         if (right < start || end < left) return 0;
         if (left <= start && end <= right) return tree[node];
@@ -132,6 +147,20 @@ public class SegementTree {
         long second = maxQuery(left, right, 2 * node + 1, mid + 1, end);
 
         return Math.max(first, second);
+    }
+
+    private int strangeQuery(int left, int right, int node, int start, int end, int[] initial) {
+        if (right < start || end < left) return -1;
+        if (left <= start && end <= right) return (int) tree[node];
+
+        int mid = (start + end) / 2;
+        int leftIdx = strangeQuery(left, right, node * 2, start, mid, initial);
+        int rightIdx = strangeQuery(left, right, node * 2 + 1, mid + 1, end, initial);
+
+        if (leftIdx == -1) return rightIdx;
+        if (rightIdx == -1) return leftIdx;
+
+        return initial[leftIdx] >= initial[rightIdx] ? leftIdx : rightIdx;
     }
 
     private void IntervalSum() throws IOException {
@@ -407,31 +436,46 @@ public class SegementTree {
     }
 
     private void StrangeArray() throws IOException {
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        final int SIZE = Integer.parseInt(input.readLine());
+        int size = Integer.parseInt(br.readLine());
 
-        for (int count = 0; count < SIZE; count++) {
-            int arySize = Integer.parseInt(input.readLine());
-            String[] line = input.readLine().split(" ");
+        while (size-- > 0) {
+            int arySize = Integer.parseInt(br.readLine());
 
-            boolean hasIncreased = false;
-            boolean isValid = true;
-            for (int index = 1; index < arySize; index++) {
-                int before = Integer.parseInt(line[index - 1]);
-                int now = Integer.parseInt(line[index]);
+            tree = new long[4 * arySize];
+            int[] initial = new int[4 * arySize];
+            String[] line = br.readLine().split(" ");
 
-                if (now > before) hasIncreased = true;
-                else if (now < before && hasIncreased) {
-                    isValid = false;
-                    break;
-                }
+            for (int index = 0; index < arySize; index++) {
+                initial[index] = Integer.parseInt(line[index]);
             }
-            sb.append(isValid ? "Yes" : "No").append("\n");
+
+            strangeInit(1, 0, arySize - 1, initial);
+
+            int maxValue = Arrays.stream(initial).max().getAsInt();
+            int[] indexAry = new int[maxValue + 1];
+            Arrays.fill(indexAry, -1);
+
+            boolean flag = true;
+
+            for (int i = 0; i < arySize; i++) {
+                int num = initial[i];
+                if (indexAry[num] != -1) {
+                    int maxIdx = strangeQuery(indexAry[num] + 1, i - 1, 1, 0, arySize - 1, initial);
+                    if (maxIdx != -1 && initial[maxIdx] > num) {
+                        flag = false;
+                        break;
+                    }
+                }
+                indexAry[num] = i;
+            }
+
+            sb.append(flag ? "Yes" : "No").append("\n");
         }
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
     public static void main(String[] args) throws IOException  {
