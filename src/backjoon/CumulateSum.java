@@ -1,6 +1,8 @@
 package backjoon;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CumulateSum {
     private void SectionSum() throws IOException {
@@ -73,28 +75,27 @@ public class CumulateSum {
 
     private void Reaminder() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        String[] leng = input.readLine().split(" ");
-        final int SIZE = Integer.parseInt(leng[0]);
-        final int value = Integer.parseInt(leng[1]);
-        String[] numbers = input.readLine().split(" ");
 
-        int[] nums = new int[SIZE + 1];
+        String[] line = input.readLine().split(" ");
+        final int SIZE = Integer.parseInt(line[0]);
+        final int value = Integer.parseInt(line[1]);
 
-        nums[0] = 0;
+        String[] ary = input.readLine().split(" ");
+        Map<Integer, Long> countMap = new HashMap<>();
+
+        int sum = 0;
+        long result = 0;
+        countMap.put(0, 1L);
+
         for (int i = 0; i < SIZE; i++) {
-            nums[i + 1] = (nums[i] + Integer.parseInt(numbers[i])) % value;
+            sum = (sum + Integer.parseInt(ary[i])) % value;
+            if (sum < 0) sum += value;
+
+            result += countMap.getOrDefault(sum, 0L);
+            countMap.put(sum, countMap.getOrDefault(sum, 0L) + 1);
         }
 
-        int count = 0;
-        for (int i = SIZE; i > 0; i--) {
-            for (int j = 1; j < i; j++) {
-                if ((nums[i] - nums[j - 1]) % value == 0) count++;
-            }
-        }
-        BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        output.write(count + "\n");
-        output.flush();
-        output.close();
+        System.out.println(result);
     }
 
     private void SectionSum5() throws IOException {
@@ -136,7 +137,7 @@ public class CumulateSum {
 //        cumulateSum.SectionSum(); // 구간합 구하기4
 //        cumulateSum.Sequence(); // 수열
 //        cumulateSum.Interaction(); // 인간-컴퓨터 상호작용
-//        cumulateSum.Reaminder(); // 나머지의 합
-        cumulateSum.SectionSum5(); // 구간합 구하기5
+        cumulateSum.Reaminder(); // 나머지의 합
+//        cumulateSum.SectionSum5(); // 구간합 구하기5
     }
 }
